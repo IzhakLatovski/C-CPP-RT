@@ -1,3 +1,5 @@
+/*  program to sort an array of size 8, of zeroes and ones */
+
 #include <stdio.h>
 
 int countZeroes(int a[], int size);
