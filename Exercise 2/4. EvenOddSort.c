@@ -70,6 +70,7 @@ int sort(int* a, int size)
 	while((a[i]%2)==0)
 	{
 		evens_count++;
+		i++;
 	}
 
 	return evens_count;
