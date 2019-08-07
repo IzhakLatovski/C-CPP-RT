@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+void func1(int);
+void func2(int);
+void func3(int);
+
 int main() {
 	int number;
 	printf("Please enter a number: \n");
@@ -13,7 +17,7 @@ int main() {
 	return 0;
 }
 
-func1(int number) {
+void func1(int number) {
 	int i=0, j=0;
 	for(i=0 ; i<number ; i++) {
 		for(j=0 ; j<=i ; j++) {
@@ -26,7 +30,7 @@ func1(int number) {
 	return;
 }
 
-func2(int number) {
+void func2(int number) {
 	int i=0, j=0;
 	for(i=0 ; i<number ; i++) {
 		for(j=0 ; j<=i ; j++) {
@@ -45,7 +49,7 @@ func2(int number) {
 	return;
 }
 
-func3(int number) {
+void func3(int number) {
 	int i=0, j=0;
 	for(i=0 ; i<number ; i++) {
 		for(j=(number-i-1) ; j>0 ; j--) {
