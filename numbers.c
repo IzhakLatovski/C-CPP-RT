@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+int palindrome(int);
+int ascending(int);
+int perfect(int);
+int reverse(int);
+int prime(int);
+
 int main() {
 	int number;
 	printf("Please enter a number: \n");
@@ -9,7 +15,8 @@ int main() {
 		printf("Number is negative, please enter positive number\n");
 		scanf("%d",&number);
 	}
-	
+
+/* run 5 functions */	
 	if(palindrome(number)) {
 		printf("%d is a palindrome\n",number);
 	} else {
@@ -34,6 +41,7 @@ int main() {
 	return 0;
 }
 
+/* function to check if a number is palindrome */
 int palindrome(int number) {
 	int original=number, reversed=0, remainder;
 	while(number!=0) {
@@ -47,10 +55,12 @@ int palindrome(int number) {
 	return 0;
 }
 
+/* function to check if the digits of a number are in ascending order */
 int ascending(int number) {
 	int next=20, current=0;
 	while(number!=0) {
 		current=number%10;
+/* if digit is larger or equal to the next one, its not in ascending order */
 		if(current>=next) {
 			return 0;
 		}
@@ -60,6 +70,7 @@ int ascending(int number) {
 	return 1;
 }
 
+/* function to check if a number is perfect */
 int perfect(int number) {
 	int i, reminder, sum=0;
 	
@@ -75,6 +86,7 @@ int perfect(int number) {
 	return 0;
 }
 
+/* function to reverse the order of the digits in a number */
 int reverse(int number) {
 	int reversed=0, remainder;
 	while(number!=0) {
@@ -85,8 +97,10 @@ int reverse(int number) {
 	return reversed;
 }
 
+/* function to check if a number is prime */
 int prime(int number) {
 	int i;
+/* 1 is not prime and not not prime, can handle it specially */
 	if(number==1) {
 		return 0;
 	}
