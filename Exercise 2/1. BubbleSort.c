@@ -53,7 +53,7 @@ void bubbleSort(int* a, int size)
 	for(i=0 ; i<size-1 ; i++)		/* every iteration, the last i values are in the right place */
 
 	{
-		count=0;
+		swaps_count=0;
 		for(j=0; j<(size-i-1) ; j++)	/* compare pairs, swap if needed */
 		{
 			if(a[j]>a[j+1])
