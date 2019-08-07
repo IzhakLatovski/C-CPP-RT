@@ -6,7 +6,7 @@ int main() {
 	scanf("%d",&number);
 /* if number is negative, can't run the functions */
 	while(number<0) {
-		printf("Number is negative, wrong");
+		printf("Number is negative, please enter positive number\n");
 		scanf("%d",&number);
 	}
 	
