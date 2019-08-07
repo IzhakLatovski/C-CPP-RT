@@ -24,7 +24,7 @@ int main()
 }
 
 
-void swap(int* a, int* b)
+void swap(int* a, int* b)			/* function to swap 2 values */
 {
 	int temp=*a;
 	*a=*b;
@@ -34,7 +34,7 @@ void swap(int* a, int* b)
 }
 
 
-void printArray(int* a, int size)
+void printArray(int* a, int size)		/* function to print an array */
 {
 	int i=0;
 	for(i=0 ; i<size ; i++)
@@ -49,19 +49,20 @@ void printArray(int* a, int size)
 
 void bubbleSort(int* a, int size)
 {
-	int i=0, j=0, count=0;
-	for(i=0 ; i<size ; i++)
+	int i=0, j=0, swaps_count=0;
+	for(i=0 ; i<size-1 ; i++)		/* every iteration, the last i values are in the right place */
+
 	{
 		count=0;
-		for(j=0; j<(size-i-1) ; j++)
+		for(j=0; j<(size-i-1) ; j++)	/* compare pairs, swap if needed */
 		{
 			if(a[j]>a[j+1])
 			{
 				swap(&a[j],&a[j+1]);
-				count++;
+				swaps_count++;
 			}
 		}
-		if(count==0)
+		if(swaps_count==0)		/* if 0 swaps in iteration, array is sorted, can finish */
 		{
 			return;
 		}
