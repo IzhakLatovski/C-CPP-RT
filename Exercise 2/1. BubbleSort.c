@@ -50,7 +50,7 @@ void printArray(int* a, int size)		/* function to print an array */
 void bubbleSort(int* a, int size)
 {
 	int i=0, j=0, swaps_count=0;
-	for(i=0 ; i<size-1 ; i++)		/* every iteration, the last i values are in the right place */
+	for(i=0 ; i<size-1 ; i++)		/* every iteration, the biggest i values are in their place */
 
 	{
 		swaps_count=0;
