@@ -17,7 +17,7 @@ int main()
 	{
 		scanf("%d",&array[i]);
 	}	
-	oddSort(array,SIZE);
+	sort(array,SIZE);
 	printArray(array,SIZE);
 
 	return 0;
