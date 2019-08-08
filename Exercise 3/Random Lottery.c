@@ -7,7 +7,7 @@ int main() {
 	int random_numbers[6], i=0, r=0, c=0;
 	char board[5][10];
 	for(r=0 ; r<5 ; r++)        /* initialize board with '-' */
-    {
+        {
 	    for(c=0 ; c<10 ; c++)
 	    {
 	         board[r][c]='-';
@@ -19,15 +19,15 @@ int main() {
     		random_numbers[i]=(rand()%49)+1;
     		c=random_numbers[i]%10;
         	random_numbers[i]/=10;
-    	    r=random_numbers[i];
-    	    while(board[r][c-1]=='+'){
-    	        random_numbers[i]=(rand()%49)+1;
-    	        c=random_numbers[i]%10;
-            	random_numbers[i]/=10;
     	        r=random_numbers[i];
-    	    }
-    	    board[r][c-1]='+';
-	    }
+    	        while(board[r][c-1]=='+'){
+    	                random_numbers[i]=(rand()%49)+1;
+    	                c=random_numbers[i]%10;
+                 	random_numbers[i]/=10;
+    	                r=random_numbers[i];
+    	        }
+    	        board[r][c-1]='+';
+        }
 	    
 	    /* PRINTING-----------------------------------------*/
 	    printf(" 12345678910\n");
@@ -40,7 +40,7 @@ int main() {
 	        }
 	        printf("\n");
 	    }
-	    printf("4");
+	    printf("4");  /* print last row */
 	    for(r=0 ; r<9 ; r++)
 	    {
 	         printf("%c",board[4][r]);
