@@ -3,6 +3,8 @@
 
 
 int location(char* a, char* b);
+char* shiftLeft(char* a, int shift_by, int shift_start);
+
 
 
 int main()
@@ -14,6 +16,22 @@ int main()
 
     return 0;
 }
+
+
+char* shiftLeft(char* a, int shift_by, int shift_start)
+{
+    int i=0;
+	for(i=shift_start ; i<shift_start+shift_by ; i++)
+	{
+        a[i-shift_by]=a[i];
+	}
+	a[i]='\0';
+	
+	
+    printf("%s",a);
+	return a;
+}
+
 
 
 int location(char* a, char* b)
