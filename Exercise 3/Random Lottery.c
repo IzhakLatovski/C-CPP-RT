@@ -20,16 +20,16 @@ int main() {
     		c=random_numbers[i]%10;
         	random_numbers[i]/=10;
     	        r=random_numbers[i];
-    	        while(board[r][c-1]=='+'){
+    	        while(board[r][c-1]=='+'){		/* if number already there, pick a new one */
     	                random_numbers[i]=(rand()%49)+1;
     	                c=random_numbers[i]%10;
                  	random_numbers[i]/=10;
     	                r=random_numbers[i];
     	        }
-    	        board[r][c-1]='+';
+    	        board[r][c-1]='+';			/* put the number and get the next number */		
         }
-	    
-	    /* PRINTING-----------------------------------------*/
+	   
+/* PRINTING-----------------------------------------------------------------------------*/
 	    printf(" 12345678910\n");
 	    for(i=0 ; i<4 ; i++)
 	    {
