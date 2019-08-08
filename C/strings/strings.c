@@ -63,8 +63,6 @@ char* myCat(char* a, char* b)
         j++;
     }
     a[i]='\0';
-
-	printf("%d , %d\n",i,j);
     
     return a;
 }
