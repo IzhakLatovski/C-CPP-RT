@@ -62,7 +62,6 @@ int count(int* a, int size)			/* the function to count the value and number of m
 {
     int i=0, max_counter=1, max_value=a[0], counter=1;
 	bubbleSort(a,size);			/* sort the array using bubble sort */
-	i=0;
 	while(i<size-1)				/* go over the array */
 	{
 		while(a[i]==a[i+1])		/* count same how many times each number occurs */
