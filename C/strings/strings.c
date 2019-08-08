@@ -5,7 +5,7 @@
 int myCmp(char* a, char* b);
 char* myCpy(char* a, char* b);
 char* myCat(char* a, char* b);
-char *my_strcat(char *dest, const char *src);
+
 
 int main()
 {
@@ -17,20 +17,16 @@ int main()
 int myCmp(char* a, char* b)
 {
     int i=0;
-    while(1)
+    if((a==NULL) || (b==NULL))
     {
-        if(a[i]!=b[i])
-        {
-            return (a[i]-b[i]);
-        }
-	if((a[i]==b[i]) && (a[i]=='\0'))
-	{
-		return 0;
-	}
-        i++;
+	   return -1; 
+    }	    
+    while((a[i]==b[i]) && (a[i]!='\0'))
+    {
+		i++;
     }
-    
-    return 0;
+	
+    return a[i]-b[i];
 }
 
 
