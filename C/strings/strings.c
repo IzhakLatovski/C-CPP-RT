@@ -19,7 +19,7 @@ int myCmp(char* a, char* b)
     int i=0;
     if((a==NULL) || (b==NULL))
     {
-	   return -1; 
+	   return NULL;
     }	    
     while((a[i]==b[i]) && (a[i]!='\0'))
     {
@@ -33,6 +33,10 @@ int myCmp(char* a, char* b)
 char* myCpy(char* a, char* b)
 {
     int i=0;
+    if(a==NULL)
+    {
+	   return NULL;
+    }
     while(b[i]!='\0')
     {
         a[i]=b[i];
@@ -47,7 +51,10 @@ char* myCpy(char* a, char* b)
 char* myCat(char* a, char* b)
 {
     int i=0, j=0;
-
+    if(a==NULL)
+    {
+	   return NULL;
+    }
     while(a[i]!='\0')
     {
         i++;
