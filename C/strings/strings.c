@@ -9,11 +9,6 @@ char *my_strcat(char *dest, const char *src);
 
 int main()
 {
-	char a[]="izj";
-	char b[]="izj";
-	printf("%d",myCmp(a,b));
-
-
 
 	return 0;
 }
