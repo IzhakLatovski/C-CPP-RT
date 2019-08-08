@@ -67,11 +67,14 @@ int sort(int* a, int size)
 		}
 	}
 	i=0;
-	while((a[i]%2)==0)			/* count how many even numbers there is, and return it */
+	while(i<size)				/* count how many even numbers there is, and return it */
 	{
-		evens_count++;
-		i++;
+		while((a[i]%2)==0)			
+		{
+			evens_count++;
+			i++;
+		}
 	}
-
+	
 	return evens_count;
 }
