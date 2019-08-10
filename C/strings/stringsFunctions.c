@@ -4,15 +4,19 @@
 #include <string.h>
 
 
+void squeeze(char* a, char* b);
 int location(char* a, char* b);
 
 
 int main()
 {
     char a[]="izhak";
-    char b[]="ha";
+    char b[]="kaz";
     int result=location(a,b);
     printf("%d\n",result);
+    
+    squeeze(a,b);
+
 
     return 0;
 }
@@ -24,7 +28,7 @@ int location(char* a, char* b)
     int i=0, j=0;
     int a_size=strlen(a);
     int b_size=strlen(b);
-    if((a_size==0) || (b_size==0) || (*a=="\0") || (*b=="\0") || (a_size < b_size))
+    if((a_size==0) || (b_size==0) || (a=="/0") || (b=="/0") || (a_size < b_size))
     {
         return -1;   
     }
@@ -45,3 +49,32 @@ int location(char* a, char* b)
     
     return -1;
 }
+
+
+void squeeze(char* a, char* b)
+{ 
+  
+    int i=0, j=0, k=0;
+    int b_size=strlen(b);
+    for(i=0 ; i< b_size ; i++)
+    {
+        int a_size=strlen(a);
+        k=0;
+        for(j=0; j<a_size; j++)
+	    {
+    		if(a[j]==b[i])
+    		{
+    			for(k=j; k<a_size; k++)
+    			{
+    				a[k]=a[k+1];
+    			}
+    			a_size--;
+    			j--;	
+	    	} 
+    	}
+    }
+    a[k]="/0";
+    printf("%s\n",a);
+    
+    return;
+} 
