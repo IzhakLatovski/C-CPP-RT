@@ -1,4 +1,4 @@
-/* לצערי מסםר ימים עם מחויבויות קודמות, אשלים בהקדם */
+/* לצערי מספר ימים עם מחויבויות קודמות, אשלים בהקדם */
 
 #include <stdio.h>
 #include <string.h>
@@ -6,6 +6,7 @@
 
 void squeeze(char* a, char* b);
 int location(char* a, char* b);
+int Bin2Int(char* binary)
 
 
 int main()
@@ -52,8 +53,7 @@ int location(char* a, char* b)
 
 
 void squeeze(char* a, char* b)
-{ 
-  
+{   
     int i=0, j=0, k=0;
     int b_size=strlen(b);
     for(i=0 ; i< b_size ; i++)
@@ -78,3 +78,23 @@ void squeeze(char* a, char* b)
     
     return;
 } 
+
+
+void Bin2Int()		/* didnt had the time to finish before submission */
+{
+	
+	while(
+	
+		int i=0, result=0, base=1;
+		binary_size=strlen(binary);
+		for(i=binary_size-1 ; i>=0 ; i--)
+		{
+			if(binary[i]=="1")
+			{
+				result+=base;
+			}
+			base*=2;
+		}
+	
+	return;	
+}
