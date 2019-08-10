@@ -24,6 +24,10 @@ int location(char* a, char* b)
     int i=0, j=0;
     int a_size=strlen(a);
     int b_size=strlen(b);
+    if((a_size==0) || (b_size==0) || (*a=="\0") || (*b=="\0") || (a_size < b_size))
+    {
+        return -1;   
+    }
     for(i=0 ; i<(a_size-(b_size)+1) ; i++)
     {
         while((a[i]==b[j]) && (i<=a_size))
