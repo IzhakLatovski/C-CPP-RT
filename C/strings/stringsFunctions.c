@@ -82,7 +82,7 @@ void squeeze(char* a, char* b)
 } 
 
 
-		
+/* didnt finish but the idea is here---------------------------------------------------- */		
 void Int2Bin()
 {
     int number=0;
@@ -125,6 +125,8 @@ void Int2Bin()
     
 }
 
+
+/* didnt finish but this is the algorithm, and should be used like in Int2Bin--------------------------------------- */		
 
 void Bin2Int() 
 {
