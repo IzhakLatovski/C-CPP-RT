@@ -1,4 +1,4 @@
-/* לצערי מספר ימים עם מחויבויות קודמות, אשלים בהקדם */
+/* not sure I will finish all the assignment before submission*/
 
 #include <stdio.h>
 #include <string.h>
@@ -6,8 +6,8 @@
 
 void squeeze(char* a, char* b);
 int location(char* a, char* b);
-int Bin2Int(char* binary)
-
+int Bin2Int(char* binary);
+void Int2Bin();
 
 int main()
 {
@@ -17,6 +17,8 @@ int main()
     printf("%d\n",result);
     
     squeeze(a,b);
+	
+	Int2Bin;
 
 
     return 0;
@@ -80,10 +82,52 @@ void squeeze(char* a, char* b)
 } 
 
 
-void Bin2Int()		/* didnt had the time to finish before submission */
+		
+void Int2Bin()
 {
-	
-	while(
+    int number=0;
+    char binary_number[33];
+    int i = 0;
+
+    printf("Enter positive integer:\n");
+    scanf("%d",&number);
+    if(number<0)
+    {
+        return;
+    }
+    while(number)
+    {
+        i=0;
+        while(number>0)
+        {
+            binary_number[i]=(number%2)+48;
+            number/=2;
+            i++;
+        }
+        for(i ; i<33 ; i++)
+        {
+            binary_number[i]=0+48;
+        }
+    
+      /* reverse the string---------------- */
+    
+        printf("%s\n",binary_number);
+        
+        printf("Enter positive integer:\n");
+        scanf("%d",&number);
+        if(number<0)
+        {
+            return;
+        }
+
+    }
+    return;
+    
+}
+
+
+void Bin2Int() 
+{
 	
 		int i=0, result=0, base=1;
 		binary_size=strlen(binary);
