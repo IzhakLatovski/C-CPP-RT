@@ -1,4 +1,4 @@
-/* unfortunately, not sure I will finish all the assignment before submission because of personal things*/
+/* unfortunately, couldn't finish all the assignment before submission because of personal things*/
 
 #include <stdio.h>
 #include <string.h>
