@@ -53,3 +53,20 @@ int main()
 
 	return 0;
 }
+
+/* 
+
+Testing
+
+1. Hours >= 0
+2. Hours <24
+3. Room number > 0
+
+4. End > start
+5. If start before other start - end before other start
+6. If start after another and before end - wrong
+
+7. If not such hour remove
+8. If no such hour find
+
+*/
