@@ -35,7 +35,8 @@ int insert(Array_t* array, int number)
     }
     else
     {
-        array->arr=(int*)realloc(array->arr,(array->capacity*2)*sizeof(int)); 
+        array->arr=(int*)realloc(array->arr,(array->capacity*2)*sizeof(int));
+	arrat->capacity*=2;
         if((array->arr)==NULL)
         {
             array->arr=array_adress;
