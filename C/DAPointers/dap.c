@@ -7,31 +7,31 @@
 Array_t* createArray(int capacity)
 {
     Array_t* array;
-    array=malloc(sizeof(Array_t));
+    array=(Array_t*)malloc(sizeof(Array_t));
     if(array==NULL)
     {
         return NULL;
     }
-    array->arr=malloc(capacity*(sizeof(int*))); /*  */
+    array->capacity=capacity;
+    array->index=0;
+    array->arr=(Array_t*)malloc(capacity*(sizeof(intPtr))); /*  */
     if(array->arr==NULL)
     {
         free(array);
         return NULL;
     }
-    array->capacity=capacity;
-    array->index=0;
     return array;
 }
 
 
 
-int insert(Array_t* array, int* numberPtr) /*  */
+int insert(Array_t* array, intPtr numberPtr) /*  */
 {
     if((array==NULL) || (numberPtr==NULL))  /*  */
     {
 	return -1;
     }  
-    int* array_adress=array->arr;
+    intPtr array_adress=array->arr;
     if((array->index)<(array->capacity))
     {
         array->arr[array->index]=*number;  /*  */
@@ -39,7 +39,7 @@ int insert(Array_t* array, int* numberPtr) /*  */
     }
     else
     {
-        array->arr=(int*)realloc(array->arr,(array->capacity*2)*sizeof(int*)); /*  */
+        array->arr=(intPtr*)realloc(array->arr,(array->capacity*2)*sizeof(intPtr)); /*  */
         if((array->arr)==NULL)
         {
             array->arr=array_adress;
@@ -47,25 +47,29 @@ int insert(Array_t* array, int* numberPtr) /*  */
         }
         else
         {
-            array->arr[array->index]=*number; /* */
-	    array->index++;
+            array->arr[array->index]=number; /* */
+	    (array->index)++;
         }
     }
-    return 1;
+    return 0;
 }
 
 
 
-void print(Array_t** array)  /*  */
+void print(Array_t* array)  /*  */
 {
     int i=0;
-    if(array!=NULL)
+    if((array!=NULL) && (array->arr!=NULL) )
     {
-        for(i=0 ; i<(array->index-1) ; i++)
-        {
-            printf("%d ",array->*arr[i]);  /*  */
-        }
+        for(i=0 ; i<(array->index) ; i++)
+	{
+		if(array->arr[i]!=NULL)
+		{
+		    printf("%d ",*(array->arr[i]));  /*  */
+		}
+	}
     }
+    printf("/n");
     return;
 }
 
@@ -74,13 +78,15 @@ void print(Array_t** array)  /*  */
 void destroy(Array_t* array)
 {
     int i=0;
-    for(i=0 ; i<(array->index) ; i++)	/* */
-    {
-	free(array->arr[i];
+    if((array!=NULL) && (array->arr!=NULL))
+    {    
+	    for(i=0 ; i<(array->index) ; i++)	/* */
+	    {
+		free(array->arr[i];
+	    }
     }
-    if(array!=NULL){
-        free(array->arr);
-        free(array);
-    }
+    free(array->arr);
+    free(array);
+
     return;
 }
