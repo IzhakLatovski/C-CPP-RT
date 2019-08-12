@@ -33,7 +33,10 @@ int main()
 			case 3:
 				printf("Insert hour of meeting to be removed\n");
 				scanf("%f",&hour);
-				removeAppointment(calendar,hour);
+				if((removeAppointment(calendar,hour))!=1)
+                                {
+                                     printf("no meeting to remove");
+                                }
 				break;
 			case 4:
 
