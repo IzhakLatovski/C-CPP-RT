@@ -105,7 +105,7 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 }
 
 
-void removeAppointment(Calendar_t* calendar, float begin_hour)
+Int removeAppointment(Calendar_t* calendar, float begin_hour)
 {
     int i=0;
     if(calendar!=NULL)
@@ -117,9 +117,10 @@ void removeAppointment(Calendar_t* calendar, float begin_hour)
 	    	calendar->array[i]->start_time=0;
 		calendar->array[i]->end_time=0;
 		calendar->array[i]->room_number=555;
+                return 1;
 	    }
         }
     }
     
-    return;
+    return 0;
 }
