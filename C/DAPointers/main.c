@@ -6,19 +6,19 @@
 int main()
 {
     int capacity=0, number=0, result=0;
-    int* nPtr==NULL;     /* */
+    intPtr number==NULL;     /* */
     Array_t* array;
     printf("Insert capacity\n");
     scanf("%d",&capacity);
     array=createArray(capacity);
     if(array==NULL)
     {
-        return 0;
+        return -1;
     }
-    while(number!=(-1))
+    while(*number!=(-1))
     {
         printf("Insert number\n");
-        nPtr=scanf("%d",&(*number));	 /*  */
+        scanf("%d",&number);	 /*  */
         result=insert(array,*number); /*  */
     }
     print(array);
