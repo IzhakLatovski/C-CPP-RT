@@ -20,7 +20,7 @@ Meeting_t* createMeeting();
 void destroyAd(Calendar_t* calendar);
 void printAd(Calendar_t* calendar);
 int insertAppointment(Calendar_t* calendar, Meeting_t* meeting);
-void removeAppointment(Calendar_t* calendar, float begin_hour);
+int removeAppointment(Calendar_t* calendar, float begin_hour);
 
 
 #endif
