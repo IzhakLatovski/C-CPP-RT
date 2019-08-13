@@ -135,7 +135,12 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 		{
 			if((meeting->start_time)>(calendar->array[i]->end_time)) /* start checking if not overlaps with previous */
 			{
-				else if((calendar->array[i+1]->start_time)>meeting->start_time)
+				if(i+1==calendar->index) /*-------*/
+				{
+					place++;
+					break;	
+				}
+				else if((calendar->array[i+1]->start_time)>meeting->start_time) /*---------*/
 				{
 					if((calendar->array[i+1]->start_time)>(meeting->end_time)) /* if the next one starts after this one ends-good */
 					{
@@ -144,7 +149,7 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 					}
 					else if((calendar->array[i+1]->start_time)<(meeting->end_time)) /* overlap */
 					{
-						break;
+						return 0;
 					}	
 				}					
 			}
