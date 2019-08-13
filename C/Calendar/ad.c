@@ -69,15 +69,16 @@ Meeting_t* createMeeting() /* create a meeting */
 void destroyAd(Calendar_t* calendar)	/* free all the memories and return */
 {
     int i=0;
+    if(calendar==NULL)
+    {
+        return;
+    }
     for(i=0 ; i<(calendar->index) ; i++)
     {
         free(calendar->array[i]);
     }
-    if(calendar!=NULL)
-    {
-        free(calendar->array);
-        free(calendar);
-    }
+    free(calendar->array);
+    free(calendar);
     
     return;
     
