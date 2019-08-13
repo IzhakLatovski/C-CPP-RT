@@ -23,5 +23,8 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting);
 int removeAppointment(Calendar_t* calendar, float begin_hour);
 Meeting_t* findAppointment(Calendar_t* calendar, float begin_hour);
 
+void loadFromFile(Calendar_t* calendar);
+void storeToFile(Calendar_t* calendar);
+
 
 #endif
