@@ -27,7 +27,7 @@ Calendar_t* createAd(int size)
 
 Meeting_t* createMeeting()
 {
-    float a,b;
+    float a=25,b=25;
     int room;
     Meeting_t* meeting;
     meeting=(Meeting_t*)malloc(sizeof(Meeting_t));
