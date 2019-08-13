@@ -266,7 +266,7 @@ void storeToFile(Calendar_t* calendar)
 {
 	int i=0;
 	FILE* filePtr;
-	filePtr=fopen("out.txt","w");
+	filePtr=fopen("calendar.txt","w");
 	if(filePtr==NULL)
 	{
 		return;
