@@ -10,12 +10,16 @@ int main()
 	Meeting_t* found;
 	Calendar_t* calendar;
 	printf("Insert capacity\n");
-				scanf("%d",&capacity);
-				calendar=createAd(capacity);
-				if(calendar==NULL)
-				{
-					return -1;
-				}
+	scanf("%d",&capacity);
+	if(capacity<=0)
+	{
+		return -1;
+	}
+	calendar=createAd(capacity);
+	if(calendar==NULL)
+	{
+		return -1;
+	}
 	
 /************************************************************/
 	loadFromFile(calendar);
