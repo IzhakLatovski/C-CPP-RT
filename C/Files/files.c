@@ -237,21 +237,25 @@ void loadFromFile(Calendar_t* calendar)
 	Meeting_t* meeting;
 	FILE* filePtr;
 	filePtr=fopen("calendar.txt","r");
-	if(filePtr==NULL)
+	if(filePtr!=NULL)
 	{
-		return;
+		while(1)	
+		{
+
+			fscanf(filePtr,"%f%f%d",&start,&end,&room);	/* scan 3 variables from file */
+			if(!feof(filePtr))
+			{
+				meeting=createMeeting(start,end,room);	/* create a meeting with the scanned info */
+
+				insertAppointment(calendar,meeting);	/* insert the meeting to the calendar */
+			}
+			else
+			{
+				break;
+			}
+		}	
 	}
 
-	while(feof(filePtr)==0)	/* while the file is not empty */
-	{
-
-		fscanf(filePtr,"%f %f %d",&start,&end,&room);	/* scan 3 variables from file */
-
-		meeting=createMeeting(start,end,room);	/* create a meeting with the scanned info */
-
-		insertAppointment(calendar,meeting);	/* insert the meeting to the calendar */
-
-	}
 	fclose(filePtr);
 	return;
 }
