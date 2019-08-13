@@ -4,9 +4,10 @@
 
 int main()
 {
-	int chosen=0, capacity=0, found=0;
+	int chosen=0, capacity=0;
 	float hour=0.0;
 	Meeting_t* meeting;
+	Meeting_t* found;
 	Calendar_t* calendar;
 	printf("Insert capacity\n");
 				scanf("%d",&capacity);
@@ -15,10 +16,10 @@ int main()
 				{
 					return -1;
 				}
-				break;
+
 	while(chosen>=0 && chosen<=4)
 	{
-		printf("Welcome. Choose an option:\n\nPress 1 to create a diary\npress 2 to add a meeting\npress 3 to remove a meeting\npress 4 to find a meeting\npress 5 to print the diary\npress 6 to remove the diary\n\n");
+		printf("Welcome. Choose an option:\n\npress 1 to add a meeting\npress 2 to remove a meeting\npress 3 to find a meeting\npress 4 to print the diary\n\n");
 
 		scanf("%d",&chosen);
 		switch(chosen)
@@ -41,14 +42,14 @@ int main()
 				printf("Insert hour of meeting to find\n");
 				scanf("%f",&hour);
 				found=findAppointment(calendar,hour);
-				if(found==(-1))
+				if(found==(NULL))
 				{
 					printf("No meeting in that time\n");
 				}
 				else
 				{
 					printf("There is a meeting in that time:\n");
-					printf("start:%f end:%f in room:%d\n", calendar->array[found]->start_time, calendar->array[found]->end_time, calendar->array[found]->room_number);
+					printf("start:%f end:%f in room:%d\n", found->start_time, found->end_time, found->room_number);
 				}
 				break;
 			case 4:
