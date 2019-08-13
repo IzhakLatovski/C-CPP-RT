@@ -33,7 +33,7 @@ Meeting_t* createMeeting() /* create a meeting */
     meeting=(Meeting_t*)malloc(sizeof(Meeting_t));
     if(meeting==NULL)
     {
-	return;
+	return NULL;
     }
     scanf("%f",&start);	/* get legal hours of the day */
 	while(start<0 || start>=24)
@@ -56,7 +56,7 @@ Meeting_t* createMeeting() /* create a meeting */
 	if(start>=end)	/* start must be before end */
 	{
 		printf("Meeting can't end before it started\n");
-		return;
+		return NULL;
 	}
 	meeting->start_time=start;
 	meeting->end_time=end;
@@ -213,7 +213,7 @@ int removeAppointment(Calendar_t* calendar, float begin_hour)
 }
 
 
-int findAppointment(Calendar_t* calendar, float begin_hour)
+Meeting_t* findAppointment(Calendar_t* calendar, float begin_hour)
 {
     int i=0;
     if(calendar!=NULL)
@@ -222,10 +222,10 @@ int findAppointment(Calendar_t* calendar, float begin_hour)
         {
             if((calendar->array[i]->start_time)==begin_hour)
 	    {
-		return i;
+		return calendar->array[i];
 	    }
         }
     }
     
-    return -1;
+    return NULL;
 }
