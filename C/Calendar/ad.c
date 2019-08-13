@@ -100,20 +100,10 @@ void printAd(Calendar_t* calendar)
 
 
 
-
-
-
-
-
-
-
-
-
-
 int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 {
 	Meeting_t* temp;
-	int i=0, j=0, insert=0;
+	int i=0, j=0, place=0;
 	if(calendar==NULL || meeting==NULL)
 	{
 		return 0;
@@ -122,52 +112,52 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 	{
 		return 0;
 	}
-	if(calendar->index==0)
+	if(calendar->index==0) \* if calendar is empty,insert *\
 	{
 		calendar->array[0]=meeting;
 		calendar->index++;
 		return 1;
 	}
-	if(meeting->end_time<=calendar->array[0]->start_time)
+	if(meeting->end_time<=calendar->array[0]->start_time) \* if meeting ends before the first one begins, put this one in the first place *\
 	{
-		insert=0;
+		place=0;
 	}
-	else if(meeting->start_time>=calendar->array[calendar->index-1]->end_time)
+	else if(meeting->start_time>=calendar->array[calendar->index-1]->end_time) \* if meeting starts after the last one ends, put this one in the last place *\
 	{
-		insert=calendar->index;
+		place=calendar->index;
 	}
-	else
+	else \* not first or last or only one *\
 	{
-		for(i=0 ; i<calendar->index ; i++)
+		for(i=0 ; i<calendar->index ; i++) \* compare with every meeting *\
 		{
-			if((meeting->start_time)>(calendar->array[i]->end_time))
+			if((meeting->start_time)>(calendar->array[i]->end_time)) \* start checking if not overlaps with previous *\
 			{
-				if(i+1==calendar->index)
+				if(i+1==calendar->index) \*-------*\
 				{
-					insert=i+1;
+					place++;
 					break;	
 				}
-				else if((calendar->array[i+1]->start_time)>meeting->start_time)
+				else if((calendar->array[i+1]->start_time)>meeting->start_time) \*---------*\
 				{
-					if((calendar->array[i+1]->start_time)>(meeting->end_time))
+					if((calendar->array[i+1]->start_time)>(meeting->end_time)) \* if the next one starts after this one ends-good *\
 					{
-						insert=i+1;
+						place++;
 						break;
 					}
-					else if((calendar->array[i+1]->start_time)<(meeting->end_time))
+					else if((calendar->array[i+1]->start_time)<(meeting->end_time)) \* overlap *\
 					{
 						return 0;
 					}	
 				}					
 			}
 		}
-		if(i==calendar->index)
+		if(i==calendar->index) \* if we got here, no place for meeting *\
 		{
 			return 0;
 		}
 	}
 
-	if ((calendar->index)==(calendar->capacity))
+	if ((calendar->index)==(calendar->capacity)) \* need more space *\
 	{
 		temp=*calendar->array;
 		calendar->array=realloc(calendar->array,(calendar->capacity)*2*sizeof(meeting));
@@ -181,7 +171,7 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 		}	
 	}
 
-	for(i=calendar->index ; i>insert ; i--)
+	for(i=calendar->index ; i>place ; i--) \* move last 'place' meeting to the right *\
 	{
 		calendar->array[i]=calendar->array[i-1];
 	}
@@ -189,23 +179,6 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 	calendar->index++;					
 	return 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
