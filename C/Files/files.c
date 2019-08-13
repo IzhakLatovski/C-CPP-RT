@@ -228,3 +228,52 @@ Meeting_t* findAppointment(Calendar_t* calendar, float begin_hour)
     
     return NULL;
 }
+
+
+void loadFromFile(Calendar_t* calendar)
+{
+	int room=0;
+	float start=0.0, end=0.0;
+	Meeting_t* meeting;
+	FILE* filePtr;
+	filePtr=fopen("calendar.txt","r");
+	if(filePtr==NULL)
+	{
+		return;
+	}
+
+	while(feof(filePtr)==0)	/* while the file is not empty */
+	{
+
+		fscanf(filePtr,"%f %f %d",&start,&end,&room);	/* scan 3 variables from file */
+
+		meeting=createMeeting(start,end,room);	/* create a meeting with the scanned info */
+
+		insertAppointment(calendar,meeting);	/* insert the meeting to the calendar */
+
+	}
+	fclose(filePtr);
+	return;
+}
+
+void storeToFile(Calendar_t* calendar)
+{
+	int room=0, i=0;
+	float start=0.0, end=0.0;
+	FILE* filePtr;
+	filePtr=fopen("calendar.txt","w");
+	if(filePtr==NULL)
+	{
+		return;
+	}
+	if(calendar!=NULL)
+   	{
+        	for(i=0 ; i<(calendar->index) ; i++) /* while the calendar is not empty, print to the file */
+        	{
+          		  fprintf(filePtr, "%f %f %d\n", calendar->array[i]->start_time, calendar->array[i]->end_time, calendar->array[i]->room_number);
+       		}
+        }
+	
+	fclose(filePtr);
+	return;
+}
