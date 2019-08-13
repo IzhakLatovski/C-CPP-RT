@@ -21,7 +21,7 @@ void destroyAd(Calendar_t* calendar);
 void printAd(Calendar_t* calendar);
 int insertAppointment(Calendar_t* calendar, Meeting_t* meeting);
 int removeAppointment(Calendar_t* calendar, float begin_hour);
-int findAppointment(Calendar_t* calendar, float begin_hour);
+Meeting_t* findAppointment(Calendar_t* calendar, float begin_hour);
 
 
 #endif
