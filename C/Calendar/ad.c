@@ -144,7 +144,7 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 					}
 					else if((calendar->array[i+1]->start_time)<(meeting->end_time)) /* overlap */
 					{
-						return 0;
+						break;
 					}	
 				}					
 			}
