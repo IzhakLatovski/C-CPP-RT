@@ -9,7 +9,6 @@ int main()
 	Meeting_t* meeting;
 	Meeting_t* found;
 	Calendar_t* calendar;
-	FILE* filePtr;
 	printf("Insert capacity\n");
 				scanf("%d",&capacity);
 				calendar=createAd(capacity);
@@ -19,23 +18,7 @@ int main()
 				}
 	
 /************************************************************/
-	filePtr=fopen("calendar.txt","r");
-	if(filePtr==NULL)
-	{
-		return -1;
-	}
-
-	while(feof(filePtr)==0)
-	{
-
-		fscanf(filePtr,"%f %f %d",&start,&end,&room);
-
-		meeting=createMeeting(start,end,room);
-
-		insertAppointment(calendar,meeting);
-
-	}
-	fclose(filePtr);
+	loadFromFile(calendar);
 /************************************************************/
 
 
@@ -83,20 +66,7 @@ int main()
 		
 	}
 /************************************************************/
-	filePtr=fopen("calendar.txt","w");
-	if(filePtr==NULL)
-	{
-		return -1;
-	}
-	if(calendar!=NULL)
-   	{
-        	for(i=0 ; i<(calendar->index) ; i++)
-        	{
-          		  fprintf(filePtr, "%f %f %d\n", calendar->array[i]->start_time, calendar->array[i]->end_time, calendar->array[i]->room_number);
-       		}
-        }
-	
-	fclose(filePtr);
+	storeToFile(calendar);
 /************************************************************/
 
 	destroyAd(calendar);
