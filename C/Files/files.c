@@ -264,10 +264,9 @@ void loadFromFile(Calendar_t* calendar)
 
 void storeToFile(Calendar_t* calendar)
 {
-	int room=0, i=0;
-	float start=0.0, end=0.0;
+	int i=0;
 	FILE* filePtr;
-	filePtr=fopen("calendar.txt","w");
+	filePtr=fopen("out.txt","w");
 	if(filePtr==NULL)
 	{
 		return;
