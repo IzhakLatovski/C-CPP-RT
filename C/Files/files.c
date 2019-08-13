@@ -90,7 +90,9 @@ void printAd(Calendar_t* calendar)	/* print every meeting in a row */
     {
         for(i=0 ; i<(calendar->index) ; i++)
         {
-            printf("start:%f end:%f in room:%d\n", calendar->array[i]->start_time, calendar->array[i]->end_time, calendar->array[i]->room_number);
+            printf("start:%f end:%f in room:%d\n", calendar->array[i]->start_time,
+						   calendar->array[i]->end_time,
+						   calendar->array[i]->room_number);
         }
     }
     
@@ -274,10 +276,11 @@ void storeToFile(Calendar_t* calendar)
    	{
         	for(i=0 ; i<(calendar->index) ; i++) /* while the calendar is not empty, print to the file */
         	{
-          		  fprintf(filePtr, "%f %f %d\n", calendar->array[i]->start_time, calendar->array[i]->end_time, calendar->array[i]->room_number);
+          		  fprintf(filePtr, "%f %f %d\n", calendar->array[i]->start_time,
+							 calendar->array[i]->end_time,
+							 calendar->array[i]->room_number);
        		}
-        }
-	
+        }	
 	fclose(filePtr);
 	return;
 }
