@@ -4,7 +4,7 @@
 
 
 
-Calendar_t* createAd(int size)
+Calendar_t* createAd(int size)	/* create calendar */
 {
     Calendar_t* calendar;
     calendar=(Calendar_t*)malloc(sizeof(Calendar_t));
@@ -25,9 +25,9 @@ Calendar_t* createAd(int size)
 }
 
 
-Meeting_t* createMeeting()
+Meeting_t* createMeeting() /* create a meeting */
 {
-    float a=25,b=25;
+    float start=25,end=25;
     int room;
     Meeting_t* meeting;
     meeting=(Meeting_t*)malloc(sizeof(Meeting_t));
@@ -35,38 +35,38 @@ Meeting_t* createMeeting()
     {
 	return;
     }
-    scanf("%f",&a);
-	while(a<0 || a>=24)
+    scanf("%f",&start);	/* get legal hours of the day */
+	while(start<0 || start>=24)
 	{
 		printf("Enter legal time\n");	
-		scanf("%f",&a);
+		scanf("%f",&start);
 	}
-    scanf("%f",&b);
-	while(b<0 || b>=24)
+    scanf("%f",&end);
+	while(end<0 || end>=24)
 	{
 		printf("Enter legal time\n");	
-		scanf("%f",&b);
+		scanf("%f",&end);
 	}
-    scanf("%d",&room);
+    scanf("%d",&room);	/* enter a positive room number */
 	while(room <1)
 	{
 		printf("Enter legal room number\n");	
 		scanf("%d",&room);
 	}
-	if(a>=b)
+	if(start>=end)	/* start must be before end */
 	{
 		printf("Meeting can't end before it started\n");
 		return;
 	}
-	meeting->start_time=a;
-	meeting->end_time=b;
+	meeting->start_time=start;
+	meeting->end_time=end;
 	meeting->room_number=room;
 
     return meeting;
 }
 
 
-void destroyAd(Calendar_t* calendar)
+void destroyAd(Calendar_t* calendar)	/* free all the memories and return */
 {
     int i=0;
     for(i=0 ; i<(calendar->index) ; i++)
@@ -84,7 +84,7 @@ void destroyAd(Calendar_t* calendar)
 }
 
 
-void printAd(Calendar_t* calendar)
+void printAd(Calendar_t* calendar)	/* print every meeting in a row */
 {
     int i=0;
     if(calendar!=NULL)
@@ -118,11 +118,14 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 		calendar->index++;
 		return 1;
 	}
-	if(meeting->end_time<=calendar->array[0]->start_time) /* if meeting ends before the first one begins, put this one in the first place */
+
+/* --------------------find the right place for inserting (if no place return 0)------------------------- */
+
+	if(meeting->end_time<=calendar->array[0]->start_time) /* first */
 	{
 		place=0;
 	}
-	else if(meeting->start_time>=calendar->array[calendar->index-1]->end_time) /* if meeting starts after the last one ends, put this one in the last place */
+	else if(meeting->start_time>=calendar->array[calendar->index-1]->end_time) /* last */
 	{
 		place=calendar->index;
 	}
@@ -132,12 +135,7 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 		{
 			if((meeting->start_time)>(calendar->array[i]->end_time)) /* start checking if not overlaps with previous */
 			{
-				if(i+1==calendar->index) /*-------*/
-				{
-					place++;
-					break;	
-				}
-				else if((calendar->array[i+1]->start_time)>meeting->start_time) /*---------*/
+				else if((calendar->array[i+1]->start_time)>meeting->start_time)
 				{
 					if((calendar->array[i+1]->start_time)>(meeting->end_time)) /* if the next one starts after this one ends-good */
 					{
@@ -151,7 +149,7 @@ int insertAppointment(Calendar_t* calendar, Meeting_t* meeting)
 				}					
 			}
 		}
-		if(i==calendar->index) /* if we got here, no place for meeting */
+		if(i==calendar->index) /* if we got here, no legal place for meeting */
 		{
 			return 0;
 		}
