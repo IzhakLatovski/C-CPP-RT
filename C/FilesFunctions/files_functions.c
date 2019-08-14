@@ -92,3 +92,27 @@ void countLetters(char* file_name)
 	}
 	return;
 }
+
+
+
+
+/*
+void countLetters(char* file_name)
+{
+	int i=0, j=0;
+	word** words;
+	FILE* input; 
+	input=fopen(file_name,"r");
+	if (input == NULL) { 
+		return; 
+	}
+	if(!(words=(word*)malloc(sizeof(word*)))
+	{
+		return;
+	}
+	
+
+	return;
+}
+
+*/
