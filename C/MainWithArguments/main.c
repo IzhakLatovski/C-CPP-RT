@@ -11,6 +11,12 @@ int main (int argc, char *argv[])
 	int secondLength=strlen(argv[2]);
 	int firstIsNumber=0;
 
+	if(argc>3)
+	{
+		printf("Too much arguments\n");
+		return -1;
+	}
+
 /* run on the first string and check is it number/string/none */
 	for(i=0 ; i<firstLength ; i++)
 	{
@@ -23,6 +29,11 @@ int main (int argc, char *argv[])
 			isNumber=0;
 		}
 	}
+	if(isString==0 && isNumber==0)
+	{
+		printf("Wrong input\n");
+		return -1;
+	}
 
 /* if the first one wasnt a string - look for a string */
 	if(!isString)
@@ -34,11 +45,13 @@ int main (int argc, char *argv[])
 			if(!(isalpha(argv[2][i])))
 			{
 				isString=0;
+				printf("Wrong input\n");
+				return -1;
 			}
 		}
 	}
-/* if the first one wasnt a number - look for a number */
 
+/* if the first one wasnt a number - look for a number */
 	else
 	{
 		isNumber=1;
@@ -47,6 +60,8 @@ int main (int argc, char *argv[])
 			if(!(isdigit(argv[2][i])))
 			{
 				isNumber=0;
+				printf("Wrong input\n");
+				return -1;
 			}
 		}
 	}
@@ -65,7 +80,8 @@ int main (int argc, char *argv[])
 	}
 	else
 	{
-		printf("Wrong input");
+		printf("Wrong input\n");
+		return -1;
 
 	}
 
