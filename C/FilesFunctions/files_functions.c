@@ -88,7 +88,7 @@ void countLetters(char* file_name)
 				printf("%c   %d\n",i+'a'-26,count_letters[i]);
 			}
 	
-	}
+		}
 	}
 	return;
 }
