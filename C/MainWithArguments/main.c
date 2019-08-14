@@ -4,12 +4,15 @@
 #include <ctype.h>
 
 
+int isNumber(int length, char* array[], int index);
+int isString(int length, char* array[], int index);
+
+
+
 int main (int argc, char *argv[])
 {
-	int i=0, isNumber=1, isString=1;
 	int firstLength=strlen(argv[1]);
 	int secondLength=strlen(argv[2]);
-	int firstIsNumber=0;
 
 	if(argc>3)
 	{
@@ -17,73 +20,58 @@ int main (int argc, char *argv[])
 		return -1;
 	}
 
-/* run on the first string and check is it number/string/none */
-	for(i=0 ; i<firstLength ; i++)
+	if(isNumber(firstLength,argv,1))
 	{
-		if(!(isalpha(argv[1][i])))
-		{
-			isString=0;
-		}
-		if(!(isdigit(argv[1][i])))
-		{
-			isNumber=0;
-		}
-	}
-	if(isString==0 && isNumber==0)
-	{
-		printf("Wrong input\n");
-		return -1;
-	}
-
-/* if the first one wasnt a string - look for a string */
-	if(!isString)
-	{
-		firstIsNumber=1;
-		isString=1;
-		for(i=0 ; i<secondLength ; i++)
-		{
-			if(!(isalpha(argv[2][i])))
-			{
-				isString=0;
-				printf("Wrong input\n");
-				return -1;
-			}
-		}
-	}
-
-/* if the first one wasnt a number - look for a number */
-	else
-	{
-		isNumber=1;
-		for(i=0 ; i<secondLength ; i++)
-		{
-			if(!(isdigit(argv[2][i])))
-			{
-				isNumber=0;
-				printf("Wrong input\n");
-				return -1;
-			}
-		}
-	}
-
-/* if we have a number and a string, success */
-	if(isNumber && isString)
-	{
-		if(firstIsNumber)
+		if(isString(secondLength,argv,2))
 		{
 			printf("%s is %s years old\n",argv[2],argv[1]);
-		}
-		else
-		{
-			printf("%s is %s years old\n",argv[1],argv[2]);			
+			return 0;
 		}
 	}
-	else
+	else if (isString(firstLength,argv,1))
 	{
-		printf("Wrong input\n");
-		return -1;
+		if(isNumber(secondLength,argv,2))
+		{
+			printf("%s is %s years old\n",argv[1],argv[2]);	
+			return 0;
+		}
+	}
+		
+	printf("Wrong input\n");
+	return -1;
 
+}
+
+
+
+int isNumber(int length, char* array[], int index)
+{
+	int i=0;
+
+	for(i=0 ; i<length ; i++)
+	{
+		if(!(isdigit(array[index][i])))
+		{
+			return 0;
+		}
 	}
 
-	return 0;
+	return 1;
+}
+
+
+
+int isString(int length, char* array[], int index)
+{
+	int i=0;
+
+	for(i=0 ; i<length ; i++)
+	{
+		if(!(isalpha(array[index][i])))
+		{
+			return 0;
+		}
+	}
+
+	return 1;
 }
