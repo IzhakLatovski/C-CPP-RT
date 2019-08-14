@@ -6,7 +6,7 @@
 void last(char* file_name, int n)
 {
 	
-	int index=0, lines_number=n+1;
+	int index=0, lines_number=n+1, i=0;
 	char string[512];
 	unsigned int* offsets;
 	FILE* input; 
@@ -14,9 +14,13 @@ void last(char* file_name, int n)
 	if (input == NULL) { 
 		return; 
 	} 
-	if((offsets=(unsigned int*)malloc(n*sizeof(unsigned int)))==NULL)
+	if((offsets=(unsigned int*)malloc(lines_number*sizeof(unsigned int)))==NULL)
 	{
 		return;
+	}
+	for(i=0 ; i<lines_number ; i++)
+	{
+		offsets[i]=0;
 	}	
 	while(fgets(string,512,input))
 	{
