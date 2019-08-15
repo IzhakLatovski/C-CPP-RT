@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "new.h"
+#include "dates.h"
 
 
-char* monthNames[12]={"January","February","March","April","May","June","July","August","September","October","November","December"};
-int daysInMonth[12]={31,29,31,30,31,30,31,31,30,31,30,31};
+static char* monthNames[12]={"January","February","March","April","May","June","July","August","September","October","November","December"};
+static int daysInMonth[12]={31,29,31,30,31,30,31,31,30,31,30,31};
 
 /*VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV--TIME--VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV*/
 
-int timeIsLegal(int hour, int minute, int second);
+static int timeIsLegal(int hour, int minute, int second);
 
 
 
@@ -48,7 +48,28 @@ void printTime(cTime_t* object, int format)
 			formatLetters="PM";
 		
 		}
-		printf("%d:%d:%d %s\n", (object->m_hour)%12, object->m_minute, object->m_second, formatLetters);
+		if(object->m_minute<10)
+		{
+			if(object->m_second<10)
+			{
+				printf("%d:0%d:0%d %s\n", (object->m_hour)%12, object->m_minute, object->m_second, formatLetters);
+
+			}
+			else
+			{
+				printf("%d:0%d:%d %s\n", (object->m_hour)%12, object->m_minute, object->m_second, formatLetters);
+			}
+		}
+		if(object->m_second<10)
+		{
+			printf("%d:%d:0%d %s\n", (object->m_hour)%12, object->m_minute, object->m_second, formatLetters);
+
+		}
+		else
+		{
+			printf("%d:%d:%d %s\n", (object->m_hour)%12, object->m_minute, object->m_second, formatLetters);
+
+		}
 	}
 
 	return;
@@ -188,12 +209,13 @@ void addDates(cDate_t* firstObject, cDate_t* secondObject)
 {
 	/* HAVE TO DEAL WITH LEAP YEARS HERE */
 	int day=0, month=0, year=0;
-	int firstObjectDaysInMonth=daysInMonth[firstObject->m_month-1];
-	day=getDay(firstObject)+getDay(secondObject);
-	month=getMonth(firstObject)+getMonth(secondObject)+(day/firstObjectDaysInMonth);
-	year=getYear(firstObject)+getYear(secondObject)+(month/12);
+	int daysInMonth=daysInMonth[firstObject->m_month-1];
 
-	setNewDate(firstObject,day%firstObjectDaysInMonth,month%12,year);
+	day=getDay(firstObject)+getDay(secondObject);
+	month=getMonth(firstObject)+getMonth(secondObject)+(day/daysInMonth);
+	year=getYear(firstObject)+(month/12);
+
+	setNewDate(firstObject,day%daysInMonth,month%12,year);
 
 	return;
 }
