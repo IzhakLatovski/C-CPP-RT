@@ -1,3 +1,5 @@
+/* don't have a good main for tests here */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "dates.h"
