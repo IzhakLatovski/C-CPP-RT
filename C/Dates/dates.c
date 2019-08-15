@@ -209,13 +209,13 @@ void addDates(cDate_t* firstObject, cDate_t* secondObject)
 {
 	/* HAVE TO DEAL WITH LEAP YEARS HERE */
 	int day=0, month=0, year=0;
-	int daysInMonth=daysInMonth[firstObject->m_month-1];
+	int daysIn=(daysInMonth[firstObject->m_month-1]);
 
 	day=getDay(firstObject)+getDay(secondObject);
-	month=getMonth(firstObject)+getMonth(secondObject)+(day/daysInMonth);
+	month=getMonth(firstObject)+getMonth(secondObject)+(day/daysIn);
 	year=getYear(firstObject)+(month/12);
 
-	setNewDate(firstObject,day%daysInMonth,month%12,year);
+	setNewDate(firstObject,day%daysIn,month%12,year);
 
 	return;
 }
