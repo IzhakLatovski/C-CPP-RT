@@ -222,7 +222,7 @@ void addDates(cDate_t* firstObject, cDate_t* secondObject)
 
 
 /* -------INTERNAL FUNCTION------- */
-int dateIsLegal(int day, int month, int year)
+static int dateIsLegal(int day, int month, int year)
 {
 	if(day<1 || day >31 || month<1 || month>12 || year<0 || day>daysInMonth[month-1])
 	{
