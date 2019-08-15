@@ -4,8 +4,8 @@
 #include "dates.h"
 
 
-static char* monthNames[12]={"January","February","March","April","May","June","July","August","September","October","November","December"};
-static int daysInMonth[12]={31,29,31,30,31,30,31,31,30,31,30,31};
+const char* monthNames[12]={"January","February","March","April","May","June","July","August","September","October","November","December"};
+const int daysInMonth[12]={31,29,31,30,31,30,31,31,30,31,30,31};
 
 /*VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV--TIME--VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV*/
 
