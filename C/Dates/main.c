@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "new.h"
+#include "dates.h"
 
 int main()
 {
@@ -9,9 +9,6 @@ int main()
 	cTime_t* new;
 
 	
-
-
-
 
 
 
