@@ -1,4 +1,4 @@
-/* don't have a good main for tests here */
+/* Saved another file on top of working main and didn't have time to write a new one */
 
 #include <stdio.h>
 #include <stdlib.h>
