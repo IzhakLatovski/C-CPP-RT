@@ -3,12 +3,12 @@
 
 typedef struct
 {
-	int numberOfFeatures_m;
-	int* array_m;
+	int m_numberOfFeatures;
+	int* m_array;
 } bitmap_t;
 
-
 typedef int (*BitFunction)(bitmap_t* bitmap,int feature);
+
 
 
 bitmap_t* createBitmap(int numberOfFeatures);
@@ -19,9 +19,5 @@ int bitOn(bitmap_t* bitmap, int feature);
 int bitOff(bitmap_t* bitmap, int feature);
 int bitStatus(bitmap_t* bitmap, int feature);
 int runFunction(BitFunction function,bitmap_t* bitmap,int feture);
-
-
-
-
 
 #endif
