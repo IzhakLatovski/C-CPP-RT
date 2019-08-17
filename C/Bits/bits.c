@@ -5,15 +5,15 @@
 
 
 /* function to print int type in its binary implementation */
-static void intToBinary(int n)
+static void intToBinary(int number)
 {
-  int c=0, k=0;
+  int i=0, temp=0;
    
-  for (c=0; c<sizeof(int)*8 ; c++)
+  for (i=0; i<sizeof(int)*8 ; i++)
   {
-    k=n>>c;
+    temp=number>>i;
  
-    if (k&1)
+    if (temp&1)
       printf("1");
     else
       printf("0");
