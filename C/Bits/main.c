@@ -35,7 +35,6 @@ int main()
 		}
 		else if(chosen==4)
 		{
-
 			printAllFeatures(bitmap);
 		}
 		else
@@ -44,8 +43,4 @@ int main()
 			return 0;
 		}
 	}
-
-	destroyBitmap(bitmap);
-
-	return 0;
 }

@@ -13,7 +13,6 @@ typedef int (*BitFunction)(bitmap_t* bitmap,int feature);
 
 bitmap_t* createBitmap(int numberOfFeatures);
 void destroyBitmap(bitmap_t* bitmap);
-void intToBinary(int n);
 void printAllFeatures(bitmap_t* bitmap);
 int bitOn(bitmap_t* bitmap, int feature);
 int bitOff(bitmap_t* bitmap, int feature);
