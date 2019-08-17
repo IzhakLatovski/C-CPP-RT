@@ -3,12 +3,11 @@
 #include "bits.h"
 
 
+
 int runFunction(BitFunction function,bitmap_t* bitmap,int feature)
 {
 	return function(bitmap,feature); 
 }
-
-
 
 
 
@@ -22,20 +21,22 @@ bitmap_t* createBitmap(int numberOfFeatures)
 	{
 		return NULL;
 	}
-	bitmap->array_m=(int*)malloc((sizeof(int)*(numberOfFeatures/32)));
-	if (bitmap->array_m==NULL)
+	bitmap->m_array=(int*)malloc((sizeof(int)*(numberOfFeatures/32)));
+	if (bitmap->m_array==NULL)
 	{
 			free(bitmap);
 			return NULL;
 	}
-	bitmap->numberOfFeatures_m=numberOfFeatures;
+	bitmap->m_numberOfFeatures=numberOfFeatures;
 	for(i=0 ; i<(numberOfFeatures/32)+1 ; i++)
 	{
-		bitmap->array_m[i]=0;
+		bitmap->m_array[i]=0;
 	}
 
 	return bitmap;
 }
+
+
 
 void destroyBitmap(bitmap_t* bitmap)
 {
@@ -45,11 +46,13 @@ void destroyBitmap(bitmap_t* bitmap)
 	{
 		return;
 	}
-	free(bitmap->array_m);
+	free(bitmap->m_array);
 	free(bitmap);
 
 	return;
 }
+
+
 
 void intToBinary(int n)
 {
@@ -69,12 +72,13 @@ void intToBinary(int n)
 }
 
 
+
 void printAllFeatures(bitmap_t* bitmap)
 {
 	int i=0;
-	for(i=0 ; i<(bitmap->numberOfFeatures_m/32)+1 ; i++)
+	for(i=0 ; i<(bitmap->m_numberOfFeatures/32)+1 ; i++)
 	{
-		intToBinary(bitmap->array_m[i]);
+		intToBinary(bitmap->m_array[i]);
 	}
 	printf("\n");
 }
@@ -85,45 +89,49 @@ int bitOn(bitmap_t* bitmap, int feature)
 {
 	int block=0, index=0;
 
-	if(feature<=0 || feature>bitmap->numberOfFeatures_m)
+	if(feature<=0 || feature>bitmap->m_numberOfFeatures)
 	{
 		return -1;
 	}
 	block=(feature-1)/(sizeof(int)*8);
 	index=(feature-1)%(sizeof(int)*8);
-	bitmap->array_m[block]=(bitmap->array_m[block])|(1<<(index));
+	bitmap->m_array[block]=(bitmap->m_array[block])|(1<<(index));
 
 	return 1;
 	/*shift, or*/
 }
 
+
+
 int bitOff(bitmap_t* bitmap, int feature)
 {
 	int block=0, index=0;
 
-	if(feature<=0 || feature>bitmap->numberOfFeatures_m)
+	if(feature<=0 || feature>bitmap->m_numberOfFeatures)
 	{
 		return -1;
 	}
 	block=(feature-1)/(sizeof(int)*8);
 	index=(feature-1)%(sizeof(int)*8);
-	bitmap->array_m[block]=(bitmap->array_m[block])&(~(1<<(index)));
+	bitmap->m_array[block]=(bitmap->m_array[block])&(~(1<<(index)));
 
 	return 1;
 	/*shift, not, and*/
 }
 
+
+
 int bitStatus(bitmap_t* bitmap, int feature)
 {
 	int block=0, index=0;
 
-	if(feature<=0 || feature>bitmap->numberOfFeatures_m)
+	if(feature<=0 || feature>bitmap->m_numberOfFeatures)
 	{
 		return -1;
 	}
 	block=(feature-1)/(sizeof(int)*8);
 	index=(feature-1)%(sizeof(int)*8);
-	if(((bitmap->array_m[block])&(1<<(index)))==0)
+	if(((bitmap->m_array[block])&(1<<(index)))==0)
 	{
 		printf("Bit status is 0\n");	/*JUST TO CHECK*/
 		return 0;
