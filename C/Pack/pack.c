@@ -58,3 +58,31 @@ static void intToBinary(char string)
 
     return;
 }
+
+
+int packStringUnion(char* string)
+{
+	un ourUnion;
+	int size=0, i=0, j=0;
+
+	size=strlen(string)/2;
+	if(strlen(string)%2==1)
+	{
+		size++;
+	}
+
+	for(i=0 ; i<size ; i++)
+	{
+		ourUnion.lr.left=(string[j]-'a');
+		ourUnion.lr.right=(string[j+1]-'a');
+		j+=2;
+		string[i]=ourUnion.c;
+	}
+
+	for(i=0 ; i<size ; i++)
+	{
+		intToBinary(string[i]);
+	}
+
+	return strlen(string);
+}
