@@ -25,7 +25,7 @@ int packString(char* string)
 	i=0;
 	for(j=0 ; j<size ; j++)
 	{
-		string[j]=(string[i] |= string[i+1]<<4);
+		string[j]=(string[i] | string[i+1]<<4);
 		i+=2;
 	}
 
