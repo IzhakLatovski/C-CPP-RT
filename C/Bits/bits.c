@@ -24,14 +24,6 @@ static void intToBinary(int number)
 
 
 
-/* function to run one of the functions pointed by the functions array */
-int runFunction(BitFunction function,bitmap_t* bitmap,int feature)
-{
-	return function(bitmap,feature); 
-}
-
-
-
 /* function to create a bitmap, depending on the number of features user enters in main */
 bitmap_t* createBitmap(int numberOfFeatures)
 {
