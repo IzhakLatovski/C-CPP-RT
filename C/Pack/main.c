@@ -7,8 +7,11 @@
 int main()
 {
 	char strings[]="abcapabp";
+	
+	/*choose one of the two (same result)*/
+
 	packString(strings);
-	/*packStringUnion(strings);*/
+	/*packStringUnion(strings);/*
 
 	return 0;
 }
