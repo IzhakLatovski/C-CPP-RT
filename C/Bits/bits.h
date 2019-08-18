@@ -17,6 +17,5 @@ void printAllFeatures(bitmap_t* bitmap);
 int bitOn(bitmap_t* bitmap, int feature);
 int bitOff(bitmap_t* bitmap, int feature);
 int bitStatus(bitmap_t* bitmap, int feature);
-int runFunction(BitFunction function,bitmap_t* bitmap,int feture);
 
 #endif
