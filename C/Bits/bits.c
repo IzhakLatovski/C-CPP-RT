@@ -78,7 +78,7 @@ void printAllFeatures(bitmap_t* bitmap)
 
 
 
-/* function to turn on a specific bit */
+/* function to turn on a specific bit (shift,or) */
 int bitOn(bitmap_t* bitmap, int feature)
 {
 	int block=0, index=0;
@@ -87,17 +87,18 @@ int bitOn(bitmap_t* bitmap, int feature)
 	{
 		return -1;
 	}
+	/* get the right 'int' */
 	block=(feature-1)/(sizeof(int)*8);
+	/* get the right bit inside the int */
 	index=(feature-1)%(sizeof(int)*8);
 	bitmap->m_array[block]=(bitmap->m_array[block])|(1<<(index));
 
 	return 1;
-	/*shift, or*/
 }
 
 
 
-/* function to turn off a specific bit */
+/* function to turn off a specific bit (shift,not,and) */
 int bitOff(bitmap_t* bitmap, int feature)
 {
 	int block=0, index=0;
@@ -106,17 +107,18 @@ int bitOff(bitmap_t* bitmap, int feature)
 	{
 		return -1;
 	}
+	/* get the right 'int' */
 	block=(feature-1)/(sizeof(int)*8);
+	/* get the right bit inside the int */
 	index=(feature-1)%(sizeof(int)*8);
 	bitmap->m_array[block]=(bitmap->m_array[block])&(~(1<<(index)));
 
 	return 1;
-	/*shift, not, and*/
 }
 
 
 
-/* function to get the status of a specific bit */
+/* function to get the status of a specific bit (shift,and) */
 int bitStatus(bitmap_t* bitmap, int feature)
 {
 	int block=0, index=0;
@@ -125,7 +127,9 @@ int bitStatus(bitmap_t* bitmap, int feature)
 	{
 		return -1;
 	}
+	/* get the right 'int' */
 	block=(feature-1)/(sizeof(int)*8);
+	/* get the right bit inside the int */
 	index=(feature-1)%(sizeof(int)*8);
 	if(((bitmap->m_array[block])&(1<<(index)))==0)
 	{
@@ -137,5 +141,4 @@ int bitStatus(bitmap_t* bitmap, int feature)
 		printf("Bit status is 1\n");	/*JUST TO CHECK*/
 		return 1;
 	}
-	/*shift, and*/
 }
