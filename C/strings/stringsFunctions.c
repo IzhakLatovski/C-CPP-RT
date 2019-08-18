@@ -1,13 +1,13 @@
-/* unfortunately, couldn't finish all the assignment before submission because of personal things*/
-
 #include <stdio.h>
 #include <string.h>
 
 
 void squeeze(char* a, char* b);
 int location(char* a, char* b);
-int Bin2Int(char* binary);
 void Int2Bin();
+int Bin2Int(char* binary)
+void reverseString(char* str);
+
 
 int main()
 {
@@ -24,6 +24,27 @@ int main()
     return 0;
 }
 
+void reverseString(char* string) 
+{ 
+    int length=0, i=0; 
+    char *start, *end, charac; 
+    length=strlen(string);    
+    start=string; 
+    end=string; 
+  
+    for(i=0; i<length-1; i++)
+    {
+        end++;
+    } 
+    for(i=0; i<length/2; i++)
+    {  
+        charac=*end; 
+        *end=*start; 
+        *start= charac; 
+        start++; 
+        end--; 
+    } 
+} 
 
 /* O(M*N). Possible to do KMP O(m+n), didn't have enough time */
 int location(char* a, char* b)
@@ -82,7 +103,6 @@ void squeeze(char* a, char* b)
 } 
 
 
-/* didnt finish but the idea is here---------------------------------------------------- */		
 void Int2Bin()
 {
     int number=0;
@@ -109,38 +129,24 @@ void Int2Bin()
             binary_number[i]=0+48;
         }
     
-      /* reverse the string---------------- */
-    
-        printf("%s\n",binary_number);
-        
-        printf("Enter positive integer:\n");
-        scanf("%d",&number);
-        if(number<0)
-        {
-            return;
-        }
-
     }
+    reverseString(binary_number);
+
     return;
     
 }
 
 
-/* didnt finish but this is the algorithm, and should be used like in Int2Bin--------------------------------------- */		
-
-void Bin2Int() 
+int Bin2Int(char* binary)
 {
-	
-		int i=0, result=0, base=1;
-		binary_size=strlen(binary);
-		for(i=binary_size-1 ; i>=0 ; i--)
-		{
-			if(binary[i]=="1")
-			{
-				result+=base;
-			}
-			base*=2;
+	int result=0;
+	while(*binary)
+	{	
+		if(*binary-48<0 || *bin-48>1){
+			return 0;
 		}
-	
-	return;	
+		result=(*binary-48)+result*2;
+		binary++;
+	}
+	return result;
 }
