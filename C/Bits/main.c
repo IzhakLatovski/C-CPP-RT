@@ -31,7 +31,7 @@ int main()
 		{
 			printf("Choose a feature:\n");
 			scanf("%d",&feature);
-			runFunction(functions[chosen-1],bitmap,feature);
+			functions[chosen-1](bitmap,feature);
 		}
 		else if(chosen==4)
 		{
