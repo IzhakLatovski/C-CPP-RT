@@ -8,7 +8,7 @@ static void intToBinary(char string);
 
 int packString(char* string)
 {
-	int i=0, j=0, size=0;
+	int i=0, j=0, k=0, size=0;
 
 	size=strlen(string)/2;
 	if(strlen(string)%2==1)
@@ -22,19 +22,19 @@ int packString(char* string)
 		i++;
 	}
 	
-	i=0;
+	k=0;
 	for(j=0 ; j<size ; j++)
 	{
-		string[j]=(string[i] | string[i+1]<<4);
-		i+=2;
+		string[j]=(string[k] | string[k+1]<<4);
+		k+=2;
 	}
 
-	for(i=0 ; i<size ; i++)
+	for(k=0 ; k<size ; k++)
 	{
-		intToBinary(string[i]);
+		intToBinary(string[k]);
 	}
 
-	return strlen(string);
+	return i;
 }
 
 
@@ -79,10 +79,10 @@ int packStringUnion(char* string)
 		string[i]=ourUnion.c;
 	}
 
-	for(i=0 ; i<size ; i++)
+	for(j=0 ; j<size ; j++)
 	{
-		intToBinary(string[i]);
+		intToBinary(string[j]);
 	}
 
-	return strlen(string);
+	return i;
 }
