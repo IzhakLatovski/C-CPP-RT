@@ -1,5 +1,3 @@
-/* this is what I've done in class. Unfortunately didn't have enough time at home this time to improve*/
-
 #include <stdio.h>
 #include <string.h>
 
