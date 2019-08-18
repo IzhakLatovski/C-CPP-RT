@@ -6,8 +6,9 @@
 
 int main()
 {
-	char strings[]="abcdap";
+	char strings[]="abcapabp";
 	packString(strings);
+	/*packStringUnion(strings);*/
 
 	return 0;
 }
