@@ -52,6 +52,14 @@ unsigned int setbits(unsigned char x, unsigned int p, unsigned int n, unsigned c
 	y=y>>(8-p);
 	x=(x|temp);
 	x=x|y;
+	
+	printf("x = ");
+	intToBinary(x);
+	printf(" (binary)\n");
+	printf("y = ");
+	intToBinary(y);
+	printf(" (binary)\n");
+
 
 	return x;
 }
