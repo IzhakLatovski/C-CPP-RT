@@ -3,7 +3,7 @@
 
 int invert(unsigned char x);
 int rotate(unsigned char x, unsigned int n);
-int setbits(unsigned char x, unsigned int p, unsigned int n, unsigned char y);
+unsigned int setbits(unsigned char x, unsigned int p, unsigned int n, unsigned char y);
 int setbitsTwo(unsigned int w, unsigned int i, unsigned int j, unsigned int value);
 
 
