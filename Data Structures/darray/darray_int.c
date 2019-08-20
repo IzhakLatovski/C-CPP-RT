@@ -102,8 +102,22 @@ AdtStatus darrayItemsNum(darray *dArr, int*  _numOfItems)
 	return OK;
 }
 
-/*
+
 ​AdtStatus darraySort(darray *dArr, size_t arraySize)
 {
+	int i=0, j=0, temp=0;
+	for(i=1 ; i<arraySize ; i++)
+	{
+		for(j=0 ; j<arraySize-i ; j++)
+		{
+			if((*dArr->d_arr+j)==(*dArr->d_arr+j+1))
+			{
+				temp=*dArr->d_arr+j;
+				*dArr->d_arr+j=*dArr->d_arr+j+1;
+				*dArr->d_arr+j+1=temp;
+			}
+		}
+	}
+
 	return OK;
-}*/
+}
