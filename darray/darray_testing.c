@@ -22,7 +22,8 @@ int main()
         printf("4. Set item on specific index\n");
         printf("5. Print the number of items\n");
         printf("6. Sort the array\n");
-        printf("7. Print the array\n\n");
+        printf("7. Print the array\n");
+        printf("Other - exit!\n\n");
 
         scanf("%d",&chosen);
         switch(chosen)
@@ -40,6 +41,7 @@ int main()
                 printf("Enter index to get\n");
                 scanf("%d",&index); 
                 darrayGet(ptrArray,index,&item);
+                printf("The item received: %d\n",item);
                 break;
             case 4:
                 printf("Enter index to set\n");
@@ -56,6 +58,7 @@ int main()
                 darraySort(ptrArray);
                 break;
             case 7:
+
                 darrayPrint(ptrArray);
                 break;
         }
