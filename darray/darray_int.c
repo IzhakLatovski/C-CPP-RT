@@ -85,6 +85,10 @@ AdtStatus darrayDelete(darray *dArr,  int* _item)
 	{
 		return AllocationError;
 	}
+	if(dArr->index==0)
+	{
+		return OK;
+	}
 	*_item=dArr->d_arr[dArr->index];
 	dArr->index--;
 	if((dArr->index<=0.375*dArr->capacity) && (dArr->capacity>dArr->originalCapacity))
