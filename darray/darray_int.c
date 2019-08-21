@@ -163,11 +163,11 @@ AdtStatus darraySort(darray *dArr)
 	{
 		for(j=0 ; j<dArr->index-i ; j++)
 		{
-			if((*dArr->d_arr+j)>(*dArr->d_arr+j+1))
+			if((*dArr->d_arr+j)>*(dArr->d_arr+j+1))
 			{
 				temp=dArr->d_arr[j];
-				dArr->d_arr[j]=dArr->d_arr[j+1];
-				dArr->d_arr[j+1]=temp;
+				(dArr->d_arr[j])=(dArr->d_arr[j+1]);
+				(dArr->d_arr[j+1])=temp;
 			}
 		}
 	}
