@@ -176,6 +176,7 @@ AdtStatus darraySort(darray *dArr)
 }
 
 
+/*ADDITIONAL FUNCTION FOR TESTING*/
 AdtStatus darrayPrint(darray *dArr)
 {
 	int i=0;
