@@ -11,7 +11,10 @@ node_t* flipLinkedList (node_t* node);
 node_t* findMiddleOfLinkedList (node_t* node);
 int findLoopInLinkedList (node_t* node);
 node_t* findCommonNode (node_t* nodeOne, node_t* nodeTwo);
+
 void printLinkedList (node_t* node);
+int findListLength(node_t* node);
+
 
 
 int main()
@@ -90,12 +93,12 @@ int main()
 
 node_t* flipLinkedList (node_t* node)
 {
+	node_t* nextNode;
+	node_t* previousNode;
 	if(node==NULL)
 	{
 		return NULL;
 	}
-	node_t* nextNode;
-	node_t* previousNode;
 	/* make the first one point to null */
 	if(node->next!=NULL)
 	{
@@ -120,12 +123,12 @@ node_t* flipLinkedList (node_t* node)
 
 node_t* findMiddleOfLinkedList (node_t* node)
 {
+	node_t* currentNode=node;
+	node_t* lastNode=node;
 	if(node==NULL)
 	{
 		return NULL;
 	}
-	node_t* currentNode=node;
-	node_t* lastNode=node;
 	/* if list is size of 1 or 2, return first one */
 	if(node->next==NULL || node->next->next==NULL)
 	{
@@ -141,12 +144,12 @@ node_t* findMiddleOfLinkedList (node_t* node)
 
 int findLoopInLinkedList (node_t* node)
 {
-	if(node==NULL)
-	{
-		return NULL;
-	}
 	node_t* currentNode=node;
 	node_t* lastNode=node;
+	if(node==NULL)
+	{
+		return -1;
+	}
 	/* if list is size of 1, no loops */
 	if(currentNode->next==NULL)
 	{
@@ -166,25 +169,16 @@ int findLoopInLinkedList (node_t* node)
 
 node_t* findCommonNode (node_t* nodeOne, node_t* nodeTwo)
 {
+	int firstLength=1, secondLength=1, difference=0, i=0;
+	node_t* firstNode=nodeOne;
+	node_t* secondNode=nodeTwo;
+
 	if(nodeOne==NULL || nodeTwo==NULL)
 	{
 		return NULL;
 	}
-	int firstLength=1, secondLength=1, difference=0, i=0;
-	node_t* firstNode=nodeOne;
-	node_t* secondNode=nodeTwo;
-	while(firstNode->next!=NULL)
-	{
-		firstLength++;
-		firstNode=firstNode->next;
-	}
-	while(secondNode->next!=NULL)
-	{
-		secondLength++;
-		secondNode=secondNode->next;
-	}
-	firstNode=nodeOne;
-	secondNode=nodeTwo;
+	firstLength=findListLength(nodeOne);
+	secondLength=findListLength(nodeTwo);
 	if(firstLength-secondLength>0)
 	{
 		difference=firstLength-secondLength;
@@ -221,4 +215,17 @@ void printLinkedList (node_t* node)
 	}
 		printf("\n");
 
+		return;
+}
+
+int findListLength(node_t* node)
+{
+	int length=1;
+	while(node->next!=NULL)
+	{
+		length++;
+		node=node->next;
+	}
+
+	return length;
 }
