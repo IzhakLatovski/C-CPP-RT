@@ -14,7 +14,7 @@ struct darray
 static void quicksort(darray* dArr,size_t first,size_t last,elementCompare compareFunc)
 {
 	size_t i=0, j=0, pivot=0;
-    void* temp;
+       void* temp;
 	if(first<last)
 	{
     	pivot=first;
