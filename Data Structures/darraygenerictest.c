@@ -121,6 +121,10 @@ void printPoint (void *_elem)
 
 int comparePoints(void *_elemA, void *_elemB)
 {   
+    if(_elemA==NULL || _elemB==NULL)
+    {
+        return -1;
+    }
     point_t* pointA=(point_t*)_elemA;
     point_t* pointB=(point_t*)_elemB;
     int res=(pointA->x+pointA->y)-(pointB->x+pointB->y);
