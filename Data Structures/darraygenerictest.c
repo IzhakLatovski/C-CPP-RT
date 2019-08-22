@@ -5,6 +5,7 @@
 void destroyPoint (void *_elem, void *context);
 void printPoint (void *_elem);
 int comparePoints(void *_elemA, void *_elemB);
+int getMenuOption();
 
 typedef struct 
 {
