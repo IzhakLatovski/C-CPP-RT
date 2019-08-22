@@ -28,7 +28,4 @@ AdtStatus   darrayItemsNum(darray *dArr, int*  _numOfItems);
 /* in place (ascending) sorting an array of size arraySize */
 AdtStatus darraySort(darray *dArr);
 
-/*MY FUNCTION ADDITION FOR TESTING*/
-AdtStatus darrayPrint(darray *dArr);
-
 #endif
