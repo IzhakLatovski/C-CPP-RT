@@ -40,17 +40,7 @@ int main()
 
     while(chosen>=0 && chosen<=7)
     {
-        printf("Choose an option:\n");
-        printf("1. Add an item\n");
-        printf("2. Delete an item\n");
-        printf("3. Get item on specific index\n");
-        printf("4. Set item on specific index\n");
-        printf("5. Print the number of items\n");
-        printf("6. Sort the array\n");
-        printf("7. Print the array(deleted function)\n");
-        printf("Other - exit!\n\n");
-
-        scanf("%d",&chosen);
+        chosen=getMenuOption;
         switch(chosen)
         {
             case 1:
@@ -129,4 +119,21 @@ int comparePoints(void *_elemA, void *_elemB)
     point_t* pointB=(point_t*)_elemB;
     int res=(pointA->x+pointA->y)-(pointB->x+pointB->y);
     return res;
+}
+
+int getMenuOption()
+{
+        printf("Choose an option:\n");
+        printf("1. Add an item\n");
+        printf("2. Delete an item\n");
+        printf("3. Get item on specific index\n");
+        printf("4. Set item on specific index\n");
+        printf("5. Print the number of items\n");
+        printf("6. Sort the array\n");
+        printf("7. Print the array(deleted function)\n");
+        printf("Other - exit!\n\n");
+
+        scanf("%d",&chosen);
+    
+        return chosen;
 }
