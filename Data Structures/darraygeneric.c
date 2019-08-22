@@ -214,19 +214,3 @@ AdtStatus darraySort(darray *dArr, elementCompare compareFunc)
 
 	return OK;
 }
-
-
-/*ADDITIONAL FUNCTION FOR TESTING*/
-AdtStatus darrayPrint(darray *dArr, elementPrint printFunc)
-{
-	int i=0;
-
-    if(dArr==NULL)
-    {
-        return AllocationError;        
-    }  
-    quicksort(dArr,0, dArr->index-1,comp);
-    printf("\n");
-
-    return  OK;
-}
