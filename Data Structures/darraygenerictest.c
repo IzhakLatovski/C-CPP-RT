@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "darraygeneric.h"
 
 void destroyPoint (void *_elem, void *context);
