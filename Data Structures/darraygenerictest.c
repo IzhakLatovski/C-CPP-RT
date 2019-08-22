@@ -47,7 +47,7 @@ int main()
         printf("4. Set item on specific index\n");
         printf("5. Print the number of items\n");
         printf("6. Sort the array\n");
-        printf("7. Print the array\n");
+        printf("7. Print the array(deleted function)\n");
         printf("Other - exit!\n\n");
 
         scanf("%d",&chosen);
@@ -92,10 +92,6 @@ int main()
             case 6:
                 darraySort(ptrArray,compFunc);
                 darrayPrint(ptrArray,printFunc);
-                break;
-            case 7:
-
-                darrayPrint(ptrArray, printFunc);
                 break;
         }
     }
