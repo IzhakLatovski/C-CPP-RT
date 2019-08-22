@@ -108,23 +108,25 @@ int main()
 
 
 void destroyPoint (void *_elem, void *context)
-{ FILE* fp=(FILE*)context;
- point_t* p=(point_t*)_elem;
-    fprintf(fp,"x= %d ",p->x);
-    fprintf(fp,"y= %d ",p->y);
-     free(p);
+{
+    FILE* fp=(FILE*)context;
+    point_t* point=(point_t*)_elem;
+    fprintf(fp,"x = %d ",point->x);
+    fprintf(fp,"y = %d ",point->y);
+    free(point);
 }
 
 void printPoint (void *_elem)
 {
-    point_t* p=(point_t*)_elem;
-    printf("x= %d ",p->x);
-    printf("y= %d ",p->y);
+    point_t* point=(point_t*)_elem;
+    printf("x = %d ",point->x);
+    printf("y = %d ",point->y);
 }
 
- int  comparePoints(void *_elemA, void *_elemB)
-{   point_t* pA=(point_t*)_elemA;
-    point_t* pB=(point_t*)_elemB;
-    int res=(pA->x+pA->y)-(pB->x+pB->y);
+int comparePoints(void *_elemA, void *_elemB)
+{   
+    point_t* pointA=(point_t*)_elemA;
+    point_t* pointB=(point_t*)_elemB;
+    int res=(pointA->x+pointA->y)-(pointB->x+pointB->y);
     return res;
 }
