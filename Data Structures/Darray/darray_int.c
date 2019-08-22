@@ -174,3 +174,20 @@ AdtStatus darraySort(darray *dArr)
 
 	return OK;
 }
+
+/*ADDITIONAL FUNCTION FOR TESTING*/
+AdtStatus darrayPrint(darray *dArr)
+{
+	int i=0;
+    if(dArr==NULL)
+    {
+        return AllocationError;        
+    }  
+    for(i=0 ; i<dArr->index ; i++)
+    {
+        printf("%d_",dArr->d_arr[i]);
+    }
+    printf("\n");
+
+    return  OK;
+}
