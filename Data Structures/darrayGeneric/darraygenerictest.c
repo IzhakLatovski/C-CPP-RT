@@ -1,3 +1,5 @@
+/*changed the whole exercise. didn't have time to do the new main as needed*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "darraygeneric.h"
@@ -82,7 +84,6 @@ int main()
                 break;
             case 6:
                 darraySort(ptrArray,compFunc);
-                darrayPrint(ptrArray,printFunc);
                 break;
         }
     }
