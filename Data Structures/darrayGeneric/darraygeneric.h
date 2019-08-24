@@ -9,7 +9,6 @@
 ​typedef enum  {OK, AllocationError, IndexError} AdtStatus; ​
 typedef void (* elementDestroy)(void *_elem, void *context);
 typedef int (* elementCompare)(void *_elemA, void *_elemB);
-typedef void (* elementPrint)(void *_elem);
 /* forward declaration of the darray type */
 typedef struct darray darray;​
 /* Create a new dynamic array. Return its address in d_arr.
