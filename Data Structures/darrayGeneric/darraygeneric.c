@@ -1,65 +1,43 @@
 #include <stdlib.h>
 #include "darraygeneric.h"
 
-struct darray
+static void swap(void **firstElement, void **secondElement);
+static int partition (void** array, size_t first, size_t last, elementCompare compareFunc);
+static void darrayQuickSort(darray *dArr, elementCompare compareFunc, int lower, int higher);
+
+
+
+typedef struct darray
 {
 	void** d_arr;
 	size_t capacity;
 	size_t index;
 	size_t originalCapacity;
-};
+} darray;
 
-
-static void quicksort(darray* dArr,size_t first,size_t last,elementCompare compareFunc)
-{
-	size_t i=0, j=0, pivot=0;
-       void* temp;
-	if(first<last)
-	{
-    	pivot=first;
-    	i=first;
-    	j=last;
-	    while(i<j)
-	    {
-	        while(compareFunc(dArr->d_arr[i],dArr->d_arr[pivot])<=0 && i<last)
-	        {
-	        	i++;
-	        }
-	        while(compareFunc(dArr->d_arr[j],dArr->d_arr[pivot])>0)
-	        {
-	      	 	j--;
-	      	}
-		    if(i<j)
-		    {
-		            temp=dArr->d_arr[i];
-		            dArr->d_arr[i]=dArr->d_arr[j];
-		            dArr->d_arr[j]=temp;
-		    }
-	    }
-	    temp=dArr->d_arr[pivot];
-	    dArr->d_arr[pivot]=dArr->d_arr[j];
-	    dArr->d_arr[j]=temp;
-	    quicksort(dArr,first,j-1,compareFunc);
-	    quicksort(dArr,j+1,last,compareFunc);
-}
 
 
 AdtStatus darrayCreate(darray **dArr, size_t initial_capacity)
 {
-	*dArr=malloc(sizeof(darray));
-	if(*dArr==NULL)
+    void* temp;
+    darray* tempItem;
+    temp=malloc(sizeof(void*)*initial_capacity);
+    if(temp==NULL)
+    {
+        return AllocationError;
+    }
+	tempItem=malloc(sizeof(darray));
+	if(tempItem==NULL)
 	{
-		return AllocationError;
+	    free(temp);
+	    return AllocationError;
 	}
-	(*dArr)->d_arr=malloc(sizeof(void*)*initial_capacity);
-	if((*dArr)->d_arr==NULL)
-	{
-		free(*dArr);
-		return AllocationError;
-	}
-	(*dArr)->capacity=initial_capacity;
-	(*dArr)->index=0;
-	(*dArr)->originalCapacity=initial_capacity;
+
+	tempItem->capacity=initial_capacity;
+	tempItem->index=0;
+	tempItem->originalCapacity=initial_capacity;
+	tempItem->d_arr=temp;
+	*dArr=tempItem;
 
 	return OK;
 }
@@ -86,7 +64,7 @@ AdtStatus darrayDestroy(darray *dArr, elementDestroy destroyFunc, void *context)
 
 AdtStatus darrayAdd(darray *dArr,  void  *_item)
 {
-	void** temp;
+	void* temp;
 
 	if(dArr==NULL)
 	{
@@ -99,7 +77,7 @@ AdtStatus darrayAdd(darray *dArr,  void  *_item)
 	}
 	else
 	{
-		temp=realloc(dArr->d_arr,sizeof(void*)*dArr->capacity*2);
+		temp=(void*)realloc(dArr->d_arr,sizeof(void*)*dArr->capacity*2);
 		if(temp==NULL)
 		{
 			free(dArr->d_arr);
@@ -118,9 +96,13 @@ AdtStatus darrayAdd(darray *dArr,  void  *_item)
 
 AdtStatus darrayDelete(darray *dArr,  void** _item)
 {
-	void** temp;
+	void* temp;
 
 	if(dArr==NULL)
+	{
+		return AllocationError;
+	}
+	if(dArr->d_arr==NULL)
 	{
 		return AllocationError;
 	}
@@ -128,11 +110,11 @@ AdtStatus darrayDelete(darray *dArr,  void** _item)
 	{
 		return IndexError;
 	}
-	*_item=dArr->d_arr[dArr->index];
+	*_item=dArr->d_arr[dArr->index-1];
 	dArr->index--;
 	if((dArr->index<=0.375*dArr->capacity) && (dArr->capacity>dArr->originalCapacity))
 	{
-		temp=realloc(dArr->d_arr,sizeof(void*)*(dArr->capacity)*0.5);
+		temp=(void*)realloc(dArr->d_arr,sizeof(void*)*(dArr->capacity)*0.5);
 		if(temp==NULL)
 		{
 			free(dArr->d_arr);
@@ -192,24 +174,52 @@ AdtStatus darrayItemsNum(darray *dArr, int*  _numOfItems)
 
 AdtStatus darraySort(darray *dArr, elementCompare compareFunc)
 {
-	int i=0, j=0, temp=0;
-
-	if(dArr==NULL)
+	if(dArr==NULL || dArr->d_arr==NULL)
 	{
-		return AllocationError;
+	    return AllocationError;
 	}
-	for(i=1 ; i<dArr->index ; i++)
-	{
-		for(j=0 ; j<dArr->index-i ; j++)
-		{
-			if((*dArr->d_arr+j)>*(dArr->d_arr+j+1))
-			{
-				temp=dArr->d_arr[j];
-				(dArr->d_arr[j])=(dArr->d_arr[j+1]);
-				(dArr->d_arr[j+1])=temp;
-			}
-		}
-	}
+	darrayQuickSort(darr,compareFunc,0,dArr->index-1);
 
 	return OK;
+}
+
+static void swap(void **firstElement, void **secondElement) 
+{ 
+    void* temp = *firstElement; 
+    *firstElement = *secondElement; 
+    *secondElement = temp; 
+    
+    return;
+} 
+
+static int partition (void** array, size_t first, size_t last, elementCompare compareFunc)
+{
+    int i=first-1, j=0;
+    void* pivot;
+
+    pivot=array[last];
+    for(j=first, j<=last, j++)
+    {
+        if(compareFunc(array[j],pivot)<=0)
+        {
+            i++;
+            swap(array[i],array[j]);
+        }
+    }
+   swap(&array[i+1],&array[last]);
+   
+   return (i+1);
+}
+
+static void darrayQuickSort(darray *dArr, elementCompare compareFunc, int lower, int higher)
+{
+    int part;
+    if(lower<higher) 
+    { 
+        part=partition(dArr->m_arr,lower,higher,compareFunc); 
+        darrayQuickSort(dArr,compareFunc,lower, part-1); 
+        darrayQuickSort(dArr,compareFunc,part+1,higher); 
+    }
+    
+    return;
 }
