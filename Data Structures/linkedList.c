@@ -62,7 +62,7 @@ int main()
 
 	/*---------------------------TEST 2nd FUNCTION - MIDDLE---------------------------*/
 	/*
-	printf("%d is the value in the middle\n",findMiddleOfLinkedList(bd)->value);
+	printf("%d is the value in the middle\n",findMiddleOfLinkedList(ba)->value);
 	*/
 
 	/*---------------------------TEST 3rd FUNCTION - CHECK LOOP-----------------------*/
