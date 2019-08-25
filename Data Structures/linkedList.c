@@ -139,6 +139,7 @@ node_t* findMiddleOfLinkedList (node_t* node)
 		currentNode=currentNode->next;
 		lastNode=lastNode->next->next;
 	}
+	
 	return currentNode;
 }
 
@@ -164,6 +165,7 @@ int findLoopInLinkedList (node_t* node)
 			return 1;
 		}
 	}
+	
 	return 0;
 }
 
@@ -213,9 +215,9 @@ void printLinkedList (node_t* node)
 		printf("%d ",node->value);
 		node=node->next;
 	}
-		printf("\n");
+	printf("\n");
 
-		return;
+	return;
 }
 
 int findListLength(node_t* node)
