@@ -117,7 +117,7 @@ AdtStatus insertBstNode(tree_t* tree, int value)
 	node_t* treeRoot;
     if(tree==NULL)
     {
-        return AllocationError;
+        return TreeError;
     }
     temp=(node_t*)malloc(sizeof(node_t));
     if(temp==NULL)
