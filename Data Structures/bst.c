@@ -21,6 +21,25 @@ static void preorderWalk(node_t* root, walkFunction func);
 static void postorderWalk(node_t* root, walkFunction func);
 
 
+
+/* REGULAR CREATE
+tree_t* createBst(int value)
+{
+    tree_t* temp=(tree_t*)malloc(sizeof(tree_t));
+    if(temp==NULL)
+    {
+        return NULL;
+    }
+    temp->key=value;
+    temp->left=NULL;
+    temp->right=NULL;
+
+    return temp;
+}
+*/
+
+
+
 tree_t* createBst(int value)
 {
     tree_t* temp=(tree_t*)malloc(sizeof(tree_t));
@@ -32,6 +51,28 @@ tree_t* createBst(int value)
 
     return temp;
 }
+
+
+
+/* REGULAR DESTROY
+void destroyBst(tree_t* root)
+{
+	if(root!=NULL)
+	{
+		if((root->left==NULL) && (root->right==NULL))
+		{
+			free(root);
+		}
+		else
+		{
+			destroyBst(root->left);
+			destroyBst(root->right);
+		}
+	}
+
+	return;
+}
+*/
 
 
 AdtStatus destroyBst(tree_t* tree)
@@ -47,6 +88,27 @@ AdtStatus destroyBst(tree_t* tree)
 
 	return OK;
 }
+
+
+/* REGULAR INSERT
+tree_t* insertBstNode(tree_t* root, int value)
+{
+    if(root==NULL)
+    {
+        return createBst(value);
+    }
+    if(value<=root->key)
+    {
+        root->left=insertBstNode(root->left,value);
+    }
+    else
+    {
+        root->right=insertBstNode(root->right,value);
+    }
+
+    return root;
+}
+*/
 
 
 AdtStatus insertBstNode(tree_t* tree, int value)
@@ -84,9 +146,86 @@ AdtStatus insertBstNode(tree_t* tree, int value)
 }
 
 
-
-AdtStatus deleteBstNode(tree_t* root, int value)
+/* REGULAR DELETE
+tree_t* deleteBstNode(tree_t* root, int value)
 {
+    tree_t* temp;
+    tree_t* father;
+    if(value<root->key)
+    {
+    	root->left=deleteBstNode(root->left,value);
+    }
+    else if(value>root->key)
+    {
+    	root->right=deleteBstNode(root->right,value);
+    }
+    else
+    {
+    	if(root->left==NULL)
+    	{
+    		temp=root->right;
+    		free(root);
+    		root=temp;
+    	}
+    	else if(root->right==NULL)
+    	{
+    		temp=root->left;
+    		free(root);
+    		root=temp;
+    	}
+    	else
+    	{
+    		temp=root->right;
+    		while(temp->left!=NULL)
+    		{
+    			father=temp;
+    			temp=temp->left;
+    		}
+    		root->key=temp->key;
+    		if(father!=NULL)
+    		{
+    			father->left=deleteBstNode(father->left,father->left->key);
+    		}
+    		else
+    		{
+    			root->right=deleteBstNode(root->right,root->right->key);
+    		}
+    	}
+    }
+*/
+
+
+AdtStatus deleteBstNode(tree_t* tree, int value)
+{
+	node_t* temp=root;
+	node_t* result;
+	if(tree==NULL)
+	{
+		return AllocationError;
+	}
+	if(searchInBst(tree,value)!=OK)
+	{
+		return NotInTheTree;
+	}
+	if(value>temp->key)
+	{
+		temp->right=deleteBstNode(temp->right,value);
+	}
+	else if(value<temp->key)
+	{
+		temp->left=deleteBstNode(temp->left,value);
+	}
+	else
+	{
+		if(temp->left==NULL)
+		{
+			result=temp->right;
+		}
+		else
+		{
+			result=temp->left;
+		}
+	}
 
 }
 
