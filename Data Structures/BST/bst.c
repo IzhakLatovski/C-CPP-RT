@@ -283,7 +283,7 @@ static void inorderWalk(node_t* root, walkFunction func)
 		return;
 	}	
 	inorderWalk(root->left);
-	walkFunction(root->key);
+	func(root->key);
 	inorderWalk(root->right);
 
 	return;
@@ -295,7 +295,7 @@ static void preorderWalk(node_t* root, walkFunction func)
 	{
 		return;
 	}	
-	walkFunction(root->key);
+	func(root->key);
 	preorderWalk(root->left);
 	preorderWalk(root->right);
 
@@ -310,7 +310,7 @@ static void postorderWalk(node_t* root, walkFunction func)
 	}	
 	postorderWalk(root->left);
 	postorderWalk(root->right);
-	walkFunction(root->key);
+	func(root->key);
 
 	return;
 }
