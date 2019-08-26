@@ -2,7 +2,7 @@
 #define H_BST
 #include <stdlib.h>
 
-typedef enum  {OK,AllocationError,NotInTheTree} AdtStatus; 
+typedef enum  {OK,AllocationError,TreeError,NotInTheTree} AdtStatus; 
 typedef void (*walkFunction) (int value);
 typedef struct tree_t tree_t;
 
