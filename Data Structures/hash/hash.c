@@ -79,6 +79,7 @@ Status hashtableInsert(hashTable_t* hashTable, void* key, void* value)
     index=hashTable->hashFunction(key);
     index%=hashTable->sizeOfHashTable;
     nextNode=hashTable->buckets[index];
+    /*while not empty list, and didn't find key*/
     while((nextNode!=NULL) && (hashTable->compareFunction(nextNode->m_key,key)!=0))
     {
         currentNode=nextNode;
@@ -126,9 +127,11 @@ Status hashtableForEach(hashTable_t* hashTable)
     {
         return NoSuchTable;
     }
+    /*pass "vertically" on the array*/
     for(i=0 ; i<hashTable->sizeOfHashTable ; i++)
     {
         newNode=hashTable->buckets[i];
+        /*pass "horizontally" on each list*/
         while(newNode!=NULL)
         {
             newNode=newNode->m_next;
