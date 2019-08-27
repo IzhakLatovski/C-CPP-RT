@@ -17,20 +17,11 @@ int main()
 static void testHashTable()
 {
 	hashTable_t* table;
-	int a=5, b=10;
-	void* testNumberOne=&a;
-	void* testNumberTwo=&b;
-	int* numberOne=(int*)testNumberOne;
-	int* numberTwo=(int*)testNumberTwo;
-
-	printf("1111");
+	
 	table=hashtableCreate(hashFunction,compareFunction,5);
-	printf("2222");
-	hashtableInsert(table,numberOne,numberTwo);/*
-	hashtableInsert(table,0,3);
-	hashtableInsert(table,4,5);
-	hashtableInsert(table,10,5);*/
-	printf("3333");
+	
+	hashtableInsert(table,numberOne,numberTwo);
+	
 	hashtableFind(table,numberOne);
 
 
