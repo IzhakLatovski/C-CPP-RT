@@ -3,6 +3,7 @@
 
 
 static node_t* createNode(void* key, void* value);
+static unsigned long hashRightKey(hashTable_t* hashTable, void* key);
 
 
 hashTable_t* hashtableCreate(hashFunc hashFunctionInput, compareFunc compareFunctionInput, size_t size)
@@ -50,8 +51,7 @@ void* hashtableFind(hashTable_t* hashTable, void* key)
     int equal=0;
     node_t* temp;
 
-    index=hashTable->hashFunction(key);
-    index%=hashTable->sizeOfHashTable;
+    index=hashRightKey(hashTable,key);
     temp=hashTable->buckets[index];
     /*temp is pointing to the right linked list start*/
     while(temp!=NULL)
@@ -71,13 +71,12 @@ void* hashtableFind(hashTable_t* hashTable, void* key)
 
 Status hashtableInsert(hashTable_t* hashTable, void* key, void* value)
 {
-    int index=0;
+    unsigned long index=0;
     node_t* nextNode;
     node_t* currentNode;
     node_t* newNode;
 
-    index=hashTable->hashFunction(key);
-    index%=hashTable->sizeOfHashTable;
+    index=hashRightKey(hashTable,key);
     nextNode=hashTable->buckets[index];
     /*while not empty list, and didn't find key*/
     while((nextNode!=NULL) && (hashTable->compareFunction(nextNode->m_key,key)!=0))
@@ -139,4 +138,15 @@ Status hashtableForEach(hashTable_t* hashTable)
     }
 
     return OK;
+}
+
+
+static unsigned long hashRightKey(hashTable_t* hashTable, void* key)
+{
+	unsigned long index=0;
+
+	index=hashTable->hashFunction(key);
+    index%=hashTable->sizeOfHashTable;
+
+    return index;
 }
