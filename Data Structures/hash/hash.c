@@ -53,10 +53,12 @@ void* hashtableFind(hashTable_t* hashTable, void* key)
     index=hashTable->hashFunction(key);
     index%=hashTable->sizeOfHashTable;
     temp=hashTable->buckets[index];
+    /*temp is pointing to the right linked list start*/
     while(temp!=NULL)
     {
+        /*while the list is not empty, compare*/
         equal=hashTable->compareFunction(temp->m_key,key);
-        if(equal)
+        if(equal==0)
         {
             return temp->m_value;
         }
