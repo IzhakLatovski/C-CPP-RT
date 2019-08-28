@@ -10,10 +10,12 @@ typedef struct node
 } node_t;
 
 
-typedef enum  {Destroyed,AllocationError,OK,ItemInHashAlready,NoSuchTable} Status;
+typedef enum  {Destroyed,AllocationError,OK,ItemInHashAlready,NoSuchTable,NoSuchItem,DeletedSuccessfully} Status;
 
 typedef unsigned long (*hashFunc) (void* key);
 typedef int (*compareFunc) (void* keyOne, void* keyTwo);
+typedef void (*destroyFunc)(void* key, void* context);
+
 
 
 typedef struct hashTable
@@ -26,9 +28,10 @@ typedef struct hashTable
 
 
 hashTable_t* hashtableCreate(hashFunc hashFunctionInput, compareFunc compareFunctionInput, size_t size);
-Status hashtableDestroy(hashTable_t* hashTable);
-void* hashtableFind(hashTable_t* hashTable, void* key);
+Status hashtableDestroy(hashTable_t* hashTable, destroyFunc destroyFunctionKey, destroyFunc destroyFunctionValue, void* context);
+Status hashtableFind(hashTable_t* hashTable, void* key, void**value);
 Status hashtableInsert(hashTable_t* hashTable, void* key, void* value);
+Status hashtableDelete(hashTable_t* hashTable, void* key, destroyFunc destroyFunctionKey, destroyFunc destroyFunctionValue, void* context);
 Status hashtableForEach(hashTable_t* hashTable);
 
 #endif
