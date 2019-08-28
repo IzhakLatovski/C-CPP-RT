@@ -1,3 +1,5 @@
+/*changed the whole implementation. testing doesnt work yet with this implementation*/
+
 #include <stdio.h>
 #include "hash.h"
 
