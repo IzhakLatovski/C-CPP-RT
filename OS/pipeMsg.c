@@ -5,7 +5,7 @@
 
 int main()
 {
-	int pipe1[2];
+    int pipe1[2];
     char buffer[64];
     pid_t pid;
     char fatherMessage[]="Hi son!\n";
