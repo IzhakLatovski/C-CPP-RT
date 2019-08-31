@@ -1,48 +1,43 @@
 #include <stdio.h>
-#include <string.h>
+#include <sys/types.h>
 #include <unistd.h>
-#include <sys/types.h> 
 #include <sys/wait.h>
 
 int main()
 {
-	pid_t pid=0;
 	int pipe1[2];
-	int pipe2[2];
-	char fatherMsg[]="Hello son!\n";
-	char sonMsg[]="BYE!!!!!\n";
-	char buffer[100];
+    char buffer[64];
+    pid_t pid;
+    char fatherMessage[]="Hi son!\n";
+    char sonMessage[]="BYE!!!!\n";
 
-	if(pipe(pipe1)==-1)
-	{
-		printf("No pipe made\n");
+    if(pipe(pipe1)==-1)
+    {
+    	printf("No pipe made\n");
 		return -1;
-	}
-	if(pipe(pipe2)==-1)
-	{
-		printf("No pipe made\n");
-		return -1;
-	}
+    }
 
-	if(pid=fork()<0)
-	{
+    pid=fork();
+
+    if(pid<0)
+    {
 		printf("No fork made\n");
 		return -2;
-	}
+    }
 
-	if(pid>0)			/* PARENT */
-	{
-		write(pipe1[1],fatherMsg,100);
-		wait(NULL);
-		read(pipe2[0],buffer,100);
-		printf("-----%s\n",buffer);
-	}
-	else				/* SON */
-	{
-		read(pipe1[0],buffer,100);
-		printf("%s\n888888888888888888888",buffer);
-		write(pipe2[1],sonMsg,100);
-	}
+    else if(pid>0)  /*father*/
+    {
+        write(pipe1[1],fatherMessage,64);
+        wait(&pid);
+        read(pipe1[0],buffer,64);
+        printf("%s", buffer);            
+    }
+    else            /*son*/
+    {
+        read(pipe1[0],buffer,64);
+        printf("%s",buffer);
+        write(pipe1[1],sonMessage,64);       
+    }
 
-	return 0;
+    return 0;
 }
