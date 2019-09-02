@@ -6,11 +6,11 @@
 int main()
 {
 	void (*runLib)(void);
-    char function[64];
+        char function[64];
 	void* handle=dlopen("libN.so",RTLD_LAZY);
 
 	printf("Enter library:\n");
-    scanf("%s",function);
+        scanf("%s",function);
 	*(void **)(&runLib) = dlsym(handle, func);
 	runLib();
 	lib1func();
