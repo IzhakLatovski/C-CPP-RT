@@ -1,30 +1,25 @@
 #include "memory.h"
 #include <stdlib.h>
 
-static void setFree(int* header);
-static void setOccupied(int* header);
-static int isFree(int* header);
+static void setFree(unsigned int* header);
+static void setOccupied(unsigned int* header);
+static int isFree(unsigned int* header);
 
-
-
-
-static void setFree(int* header)
+static void setFree(unsigned int* header)
 {
 	*header=*header & 0x7fffffff;
 }
 
-static void setOccupied(int* header)
+static void setOccupied(unsigned int* header)
 {
 	*header=*header | 0x80000000;
 }
 
-static int isFree(int* header)
+static int isFree(unsigned int* header)
 {
-	int temp=1;
-	temp=temp<<31;
-	temp=temp & (*header);
+	int result=(((*header) & 0x80000000)==1 ? 1 : 0);
 
-	return temp;
+	return result;
 }
 
 static char* split(int* header, int size)
