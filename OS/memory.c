@@ -1,10 +1,9 @@
 #include "memory.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static void setFree(unsigned int* header);
 static void setOccupied(unsigned int* header);
-static int isFree(unsigned int* header);
-static char* split(int *header, int sizeAlloc);
 
 static void setFree(unsigned int* header)
 {
@@ -16,97 +15,81 @@ static void setOccupied(unsigned int* header)
 	*header=*header | 0x80000000;
 }
 
-static int isFree(unsigned int* header)
+int isOccupied(unsigned int* header)
 {
 	int result=(((*header) & 0x80000000)==1 ? 1 : 0);
 
 	return result;
 }
 
-static char* split(int *header, int sizeAlloc)
-{   
-    *header=sizeAlloc+4;
-    *(header+sizeAlloc/4+1)=*header-sizeAlloc+4;
-    *header=sizeAlloc+4;
-     setOcc(header);
-     setFree(header+sizeAlloc/4+1);
+unsigned int getSize(unsigned int* header)
+{
+	unsigned int* temp;
+	*temp=*header & 0x7fffffff;
 
-     return (char*)header+1;     
+	return(*header);
 }
 
+/*
+static char* split(int* header, int size)
+{
+	*header=size+4;
+	*(header+(size/4)+1)=*header-size+4;
+	*header=size+4;
+	setOccupied(header);
+	setFree(header+(size/4)+1);
+
+	return (char*)header+1;
+}
+*/
 /**********************************************************/
 
-void* memInit(char* buffer, int* sizeBuffer)
+void* memInit(unsigned int* buffer, unsigned int* sizeBuffer)
 {
-	int* header;
-	unsigned int temp=((unsigned int)buffer%4); /*temp is the reminder of /4*/
+	unsigned int* header;
 
-	if(temp!=0)    /*if begins in not /4 address*/
-	{
-		(*sizeBuffer)=(*sizeBuffer)-(4-temp);
-		buffer=buffer+(4-temp);
-	}
-	if(((unsigned int)buffer+(*sizeBuffer)-1)%4!=0) /*if end in not /4 address*/
-	{
-		(*sizeBuffer)=(*sizeBuffer)-(((unsigned int)buffer+(*sizeBuffer)-1)%4);
-	}
-	header=(int*)&buffer[0];
-	*header=*sizeBuffer; /*put the whole size in the first place*/
-	setFree(header); /*tell that its all free*/
+	header=&buffer[0];
+	*header=*sizeBuffer+1;
+	setFree(header);
 
 	return;
 }
 
-void* memAlloc(char* buffer,  int sizeBuffer, int sizeAlloc )
-{   
-	int i=0;
-    int* header;
-
-    if(sizeAlloc%4!=0) /*allocate in parts of 4 bytes*/
-    {
-        sizeAlloc=sizeAlloc+(4-sizeAlloc%4);
-    }
-    while(i<sizeBuffer)
-    {   
-    	header=(int*)&buffer[i];
-        if(isFree(header)==0)
-        {
-            if(sizeAlloc+4<*header) /*if enough space - put*/
-            {
-                return split(header,sizeAlloc);
-
-            }
-            if(sizeAlloc=*header-4)
-            {
-                return header+1;
-            }
-            else if(sizeAlloc+4<*header)
-            {
-                i=i+(*header/4);
-            }
-
-        }
-        else 
-        {
-             i=i+(*header/4);    
-        }
-    }
-    return NULL;
-}
-
-void memFree(char* pointer,int sizeBuffer)
+void* memAlloc(unsigned int* buffer,  unsigned int sizeBuffer, unsigned int sizeAlloc)
 {
-    int i=0;
-    char* header=pointer;
-    int current=*((int*)header);
+	unsigned int* header;
+	unsigned int temp=0;
 
-    setFree((int*)pointer);
-    while(current<=sizeBuffer && isFree((int*)(header+*header))==0)
-    {
-        *pointer+=*(header+*header);
-        header+=*header;
-        current=current+(*((int*)header));
-    }
+	if(sizeAlloc<=0)
+	{
+		printf("small alloc size\n");
 
-    return;
+		return NULL;
+	}
+
+	if(isOccupied(buffer)==0) /*if first is free*/
+	{
+		if(sizeAlloc+1<=(*buffer)) /*if enough size*/
+		{
+			header=&buffer[sizeAlloc+1];
+			*header=buffer[0]-(sizeAlloc+1);
+			setFree(header);
+
+			header=&buffer[0];
+			*header=sizeAlloc+1;
+			setOccupied(header);
+		}
+		else
+		{
+			printf("bad 1\n");
+		}
+	}
+	else
+	{
+		temp=getSize(buffer);
+		setOccupied(buffer);
+		memAlloc(buffer+temp,sizeBuffer,sizeAlloc);
+	}
+
+	return;
 }
