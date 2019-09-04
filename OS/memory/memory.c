@@ -48,7 +48,7 @@ void* memInit(unsigned int* buffer, unsigned int* sizeBuffer)
 {
 	unsigned int* header;
 
-	if((buffer%4)!=0)	/* begin */
+	if(((unsigned int)buffer%4)!=0)	/* begin */
     {
         *sizeBuffer-=(4-((unsigned int)buffer%4));
         buffer+=(4-(unsigned int)buffer%4);
@@ -133,7 +133,7 @@ void memFree(unsigned int* buffer, unsigned int* pointer, unsigned int sizeBuffe
     }
     i-=1;
     setFree(&(buffer[(char)i]));
-    while((current<=sizeBuffer) && (isFree(p+*p)==0))
+    while((current<=sizeBuffer) && (isOccupied(p+*p)==1))
     {
         *pointer=*pointer+*(p+*p);
         p=p+*p;
