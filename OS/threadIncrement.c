@@ -11,11 +11,10 @@ int main()
 {
 	pthread_t tid;
 	int i=0;
-	int array[100];
 
 	for(i=0 ; i<100 ; i++)
 	{
-		array[i]=pthread_create(&tid,NULL,increment,NULL);
+		pthread_create(&tid,NULL,increment,NULL);
 		pthread_join(tid,NULL);
 	}
 	printf("---%d---\n",count);
