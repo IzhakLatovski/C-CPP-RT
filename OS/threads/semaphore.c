@@ -4,9 +4,9 @@
 #include <pthread.h>
 #include <semaphore.h> 
 
-#define SIZE 100
+#define SIZE 10000
 
-void* function();
+void* function(void* sum);
 
 sem_t coin;
 
@@ -29,11 +29,11 @@ int main()
 	return 0;
 }
 
-void* function(int* sum)
+void* function(void* sum)
 {
 	sem_wait(&coin);
-	printf("My index is %d!\n",*sum);
-	(*sum)++;
+	printf("My index is %d!\n",*((int*)sum));
+	(*((int*)sum))++;
 	sem_post(&coin);
 
 	return;
