@@ -9,14 +9,20 @@ int count=0;
 
 int main()
 {
-	pthread_t tid;
 	int i=0;
+	pthread_t array[100];
 
 	for(i=0 ; i<100 ; i++)
 	{
-		pthread_create(&tid,NULL,increment,NULL);
-		pthread_join(tid,NULL);
+		pthread_create(&array[i],NULL,increment,NULL);
+
 	}
+	for(i=0 ; i<100 ; i++)
+	{
+		pthread_join(array[i],NULL);
+
+	}
+
 	printf("---%d---\n",count);
 
 	return 0;
