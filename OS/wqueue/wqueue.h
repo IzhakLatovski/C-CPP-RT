@@ -3,13 +3,9 @@
 
 typedef struct wqueue wqueue;
 
-
 wqueue* createWqueue(unsigned int sizeOfQueue);
-
 int destroyWqueue(wqueue* newWqueue);
-/*
-readFromQueue();*/
-int writeToQueue(wqueue* newWqueue, char* message);
-
+int readFromQueue(wqueue* newWqueue, void** message);
+int writeToQueue(wqueue* newWqueue, void* message);
 
 #endif

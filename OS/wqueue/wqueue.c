@@ -3,25 +3,25 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <semaphore.h>
-#include <string.h>
 #include "wqueue.h"
 
 #define SIZE 10
 
 struct wqueue
 {
-	char** array;
+	void** array;
 	unsigned int head;
 	unsigned int tail;
-	sem_t semE;
-	sem_t semF;
-	/*mutex*/	
+	sem_t semWrite;
+	sem_t semRead;
+	pthread_mutex_t lock;
 	unsigned int size;
 	unsigned int itemsCounter;
 };
 
 wqueue* createWqueue(unsigned int sizeOfQueue)
 {
+	void** temp;
 	wqueue* newWqueue=(wqueue*)malloc(sizeof(wqueue));
 	if(newWqueue==NULL)
 	{
@@ -31,17 +31,31 @@ wqueue* createWqueue(unsigned int sizeOfQueue)
 	{
 		return NULL;
 	}
-	newWqueue->array=(char**)malloc(sizeof(char*)*(sizeOfQueue));
+	temp=(void**)malloc(sizeof(void*)*(sizeOfQueue));
+	if(temp==NULL)
+	{
+		return NULL;
+	}
+	newWqueue->array=temp;
 	newWqueue->head=0;
 	newWqueue->tail=0;
 	newWqueue->size=sizeOfQueue;
 	newWqueue->itemsCounter=0;
+	sem_init(&(newWqueue->semWrite),0,sizeOfQueue);
+	sem_init(&(newWqueue->semRead),0,0);
+	if(pthread_mutex_init(&(newWqueue->lock),NULL)!=0)
+	{
+		return NULL;
+	}
+
 
 	return newWqueue;
 }
 
 int destroyWqueue(wqueue* newWqueue)
 {
+	unsigned int i=0;
+
 	if(newWqueue==NULL)
 	{
 		return -1;
@@ -53,6 +67,10 @@ int destroyWqueue(wqueue* newWqueue)
 	}
 	else
 	{
+		for(i=0 ; i<newWqueue->size ; i++)
+		{
+			free(newWqueue->array[i]);
+		}
 		free(newWqueue->array);
 		free(newWqueue);
 	}
@@ -60,71 +78,42 @@ int destroyWqueue(wqueue* newWqueue)
 	return 0;
 }
 
-int writeToQueue(wqueue* newWqueue, char* message)
+int writeToQueue(wqueue* newWqueue, void* message)
 {
-	strcpy(newWqueue->array[0],message);
+	unsigned int index;
+
+	if(newWqueue==NULL || message==NULL)
+	{
+		return -1;
+	}
+	sem_wait(&(newWqueue->semWrite));
+	pthread_mutex_lock(&(newWqueue->lock));
+	index=newWqueue->tail;
+	newWqueue->array[index]=message;
 	newWqueue->tail=((newWqueue->tail+1)%newWqueue->size);
 	newWqueue->itemsCounter++;
+	pthread_mutex_unlock(&(newWqueue->lock));
+	sem_post(&(newWqueue->semRead));
 
 	return 0;
 }
 
-int main()
+int readFromQueue(wqueue* newWqueue, void** message)
 {
-	int result=3;
-	wqueue* temp;
+	unsigned int index;
 
-	char string[]="izhak";
-
-	temp=createWqueue(50);
-	result=destroyWqueue(temp);
-	printf("%d\n",result);
-	printf("HEAD:%d\n",(int)temp->head);
-	printf("TAIL:%d\n",(int)temp->tail);
-
-	writeToQueue(temp,string);
-/*
-	printf("\n\n%s\n\n",(char*)(temp->array[0]));
-*/
-	printf("HEAD:%d\n",(int)temp->head);
-	printf("TAIL:%d\n",(int)temp->tail);
-
-	return 0;
-}
-
-
-
-
-
-
-
-
-/*
-int main()
-{
-	int i=0, sum=0;
-	pthread_t array[SIZE];
-	
-	sem_init(&coin,0,1);
-	for(i=0 ; i<SIZE ; i++)
+	if(newWqueue==NULL || message==NULL)
 	{
-		pthread_create(&array[i],NULL,function,&sum);
+		return -1;
 	}
-	for(i=0 ; i<SIZE ; i++)
-	{
-		pthread_join(array[i],NULL);
-	}
-	sem_destroy(&coin);
+	sem_wait(&(newWqueue->semRead));
+	pthread_mutex_lock(&(newWqueue->lock));
+	index=newWqueue->head;
+	*message=newWqueue->array[index];
+	newWqueue->head=((newWqueue->head+1)%newWqueue->size);
+	newWqueue->itemsCounter--;
+	pthread_mutex_unlock(&(newWqueue->lock));
+	sem_post(&(newWqueue->semWrite));
 
 	return 0;
 }
-
-void* function(void* sum)
-{
-	sem_wait(&coin);
-	printf("My index is %d!\n",*((int*)sum));
-	(*((int*)sum))++;
-	sem_post(&coin);
-
-	return;
-}*/
