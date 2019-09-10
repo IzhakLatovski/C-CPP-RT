@@ -5,12 +5,6 @@
 #include <semaphore.h>
 #include "wqueue.h"
 
-#define QUEUE_SIZE 10
-#define PRODUCERS 5
-#define MESSAGES 10
-#define CONSUMERS 10
-
-
 static void printWqueue(wqueue* newWqueue);
 
 struct wqueue
