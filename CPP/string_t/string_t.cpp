@@ -1,23 +1,27 @@
 #include "string_t.h"
+#include <stdio.h>
 
 string_t::string_t()
 {
 	name="0";
+        len=0;
 }
 
 string_t::string_t(const char* nm)
 {
-	name=nm;
+	name=new char[strlen(nm)+1];
+        strcpy(name,nm);
+        len=strlen(nm);
 }
 
 string_t::~string_t()
 {
-
+        delete[] name;
 }
 
 string_t::string_t(const string_t& st)
 {
-	name=st.name;
+	name=new char[strlen()+1] ddddddd
 }
 
 void string_t::operator=(const string_t& st)
@@ -31,7 +35,7 @@ void string_t::operator=(const string_t& st)
 
 int string_t::length() const
 {
-	return strlen(name);
+	return len;
 }
 
 void string_t::setString(const char* nm)
