@@ -21,7 +21,6 @@ class string_t
 	private:
 		char* name;
 		int len;
-
 };
 
 #endif
