@@ -21,7 +21,9 @@ string_t::~string_t()
 
 string_t::string_t(const string_t& st)
 {
-	name=new char[strlen()+1] ddddddd
+	len=st.len;
+	name=new char[len+1];
+	strcpy(name,st.name);
 }
 
 void string_t::operator=(const string_t& st)
@@ -29,7 +31,8 @@ void string_t::operator=(const string_t& st)
 	if(this!=&st)
 	{
 		delete[] name;
-		name=st.name;
+		name=new char[st.len+1];
+		strcpy(name,st.name);
 	}
 }
 
@@ -40,7 +43,7 @@ int string_t::length() const
 
 void string_t::setString(const char* nm)
 {
-	name=nm;
+	strcpy(name,nm);
 }
 
 const char* string_t::getString() const
@@ -50,18 +53,7 @@ const char* string_t::getString() const
 
 int string_t::compare(string_t st2) const
 {
-	if(strcmp(name,st2.name)==0)
-	{
-		return 0;
-	}
-	else if (strcmp(name,st2.name)<0)
-	{
-		return 1;
-	}
-	else
-	{
-		return 2;
-	}
+	return (strcmp(name,st2.name);
 }
 
 void string_t::print() const
