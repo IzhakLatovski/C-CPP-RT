@@ -1,8 +1,6 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 class string_t
@@ -17,12 +15,13 @@ class string_t
 		int length() const;
 		void setString(const char* nm);
 		const char* getString() const;
-		int compare(string_t st2) const;
+		int compare(const string_t st2) const;
 		void print() const;
 
 	private:
-		const char* name;
-		
+		char* name;
+		int len;
+
 };
 
 #endif
