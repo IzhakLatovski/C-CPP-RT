@@ -3,20 +3,20 @@
 
 string_t::string_t()
 {
-	name="0";
-        len=0;
+	strcpy(name,"0");
+    len=0;
 }
 
 string_t::string_t(const char* nm)
 {
 	name=new char[strlen(nm)+1];
-        strcpy(name,nm);
-        len=strlen(nm);
+    strcpy(name,nm);
+    len=strlen(nm);
 }
 
 string_t::~string_t()
 {
-        delete[] name;
+    delete[] name;
 }
 
 string_t::string_t(const string_t& st)
@@ -44,6 +44,7 @@ int string_t::length() const
 void string_t::setString(const char* nm)
 {
 	strcpy(name,nm);
+	len=strlen(nm);
 }
 
 const char* string_t::getString() const
@@ -53,7 +54,7 @@ const char* string_t::getString() const
 
 int string_t::compare(string_t st2) const
 {
-	return (strcmp(name,st2.name);
+	return (strcmp(name,st2.name));
 }
 
 void string_t::print() const
