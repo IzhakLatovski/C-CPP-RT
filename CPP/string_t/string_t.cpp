@@ -3,7 +3,8 @@
 
 string_t::string_t()
 {
-	strcpy(name,"0");
+	name=new char[16];
+	name[0];='\0';
     len=0;
 }
 
