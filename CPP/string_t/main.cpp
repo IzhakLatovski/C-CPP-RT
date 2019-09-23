@@ -5,7 +5,7 @@
 #include <string.h>
 
 int main()
-{
+{/*
 	int chosen=1, index=0;
 	char* temp;
 	string_t string1, string2;
@@ -50,7 +50,7 @@ int main()
 				string_t case2=string_t(temp);*/
 		}
 	}
-/*
+*/
 	string_t temp1("izhak");
 	temp1.print();
 	temp1.setString("Yossi");
@@ -62,6 +62,6 @@ int main()
 	temp2.print();
 	int ln=temp1.length();
 	printf("%d\n",ln);
-*/
+
 	return 0;
 }
