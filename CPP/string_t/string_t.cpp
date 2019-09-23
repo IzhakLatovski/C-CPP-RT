@@ -4,7 +4,7 @@
 string_t::string_t()
 {
 	name=new char[16];
-	name[0];='\0';
+	name[0]='\0';
     len=0;
 }
 
