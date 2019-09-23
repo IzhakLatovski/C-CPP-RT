@@ -9,7 +9,6 @@ int main()
 	int chosen=1, index=0;
 	char* temp;
 	string_t string1, string2;
-
 	while(chosen>0 && chosen<10)
 	{
 		printf("Please choose an option:\n");
@@ -23,7 +22,6 @@ int main()
 		printf("8. Compare 2 strings:\n");
 		printf("9. Print string:\n");
 		printf("Other - EXIT\n");
-
 		scanf("%d",&chosen);
 		switch(chosen)
 		{
@@ -47,21 +45,36 @@ int main()
 			case 5:
 				printf("Enter the string\n");
 				scanf("%s",temp);
-				string_t case2=string_t(temp);*/
-		}
-	}
-*/
+				string_t case2=string_t(temp);
+		}*/
+	
+
 	string_t temp1("izhak");
 	temp1.print();
 	temp1.setString("Yossi");
 	temp1.print();
 	const char* gotName=temp1.getString();
 	printf("%s\n",gotName);
-	temp1.setString("Rita");
+	temp1.setString("RITA");
 	string_t temp2(temp1);
 	temp2.print();
 	int ln=temp1.length();
 	printf("%d\n",ln);
+	temp1.toLower();
+	temp1.print();
+	temp2.setString("AbCdE");
+	temp2.print();
+	temp2.toUpper();
+	temp2.print();
+	temp2.toLower();
+	temp1.print();
+	temp2.print();
+	printf("----%d----\n",(temp1>temp2));
+	printf("----%d----\n",(temp1<temp2));
+	printf("----%d----\n",(temp1<=temp2));
+	printf("----%d----\n",(temp1>=temp2));
+	printf("----%d----\n",(temp1==temp2));
+	printf("----%d----\n",(temp1!=temp2));
 
 	return 0;
 }
