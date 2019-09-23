@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
+
+using namespace std;
 
 int main()
 {/*
@@ -75,6 +78,22 @@ int main()
 	printf("----%d----\n",(temp1>=temp2));
 	printf("----%d----\n",(temp1==temp2));
 	printf("----%d----\n",(temp1!=temp2));
+	temp1+=temp2;
+	temp1.print();
+	temp1.setString("rita");
+	temp1.prepend(temp2);
+	temp1.print();
+	temp1.prepend("|||");
+	temp1.print();
+	temp1+="???";
+	temp1.print();
+	printf("%d\n",temp1.contains("ta?"));
+	printf("%d\n",temp1.length());
+	printf("---%c---\n",temp1[7]);
+	temp1[2]='T';
+	cout<<temp1;
+	cin>>temp1;
+	temp1.print();
 
 	return 0;
 }
