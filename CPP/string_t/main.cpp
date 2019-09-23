@@ -6,8 +6,10 @@
 
 int main()
 {
-	int chosen=1;
-	char* string;
+	int chosen=1, index=0;
+	char* temp;
+	string_t string1, string2;
+
 	while(chosen>0 && chosen<10)
 	{
 		printf("Please choose an option:\n");
@@ -25,10 +27,27 @@ int main()
 		scanf("%d",&chosen);
 		switch(chosen)
 		{
+			case 1:
+			{
+				string1();
+				break;
+			}
+			case 2:
+			{
+				printf("Enter the string to put in the new object:\n");
+				scanf("%s",temp);
+				string2(temp);
+				break;
+			}
+			case 9:
+			{
+				string2.print();
+				break;
+			}/*
 			case 5:
 				printf("Enter the string\n");
-				scanf("%s",string);
-				string_t case2=string_t(string);
+				scanf("%s",temp);
+				string_t case2=string_t(temp);*/
 		}
 	}
 /*
