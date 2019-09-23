@@ -2,39 +2,43 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#include <iostream>
+
+using namespace std;
+
 string_t::string_t()
 {
-	name=new char[32];
-	name[0]='\0';
+	string=new char[32];
+	string[0]='\0';
     len=0;
 }
 
-string_t::string_t(const char* nm)
+string_t::string_t(const char* str)
 {
-	name=new char[strlen(nm)+1];
-    strcpy(name,nm);
-    len=strlen(nm);
+	string=new char[strlen(str)+1];
+    strcpy(string,str);
+    len=strlen(str);
 }
 
 string_t::~string_t()
 {
-    delete[] name;
+    delete[] string;
 }
 
-string_t::string_t(const string_t& st)
+string_t::string_t(const string_t& str)
 {
 	len=st.len;
-	name=new char[len+1];
-	strcpy(name,st.name);
+	string=new char[len+1];
+	strcpy(string,st.string);
 }
 
-void string_t::operator=(const string_t& st)
+void string_t::operator=(const string_t& str)
 {
 	if(this!=&st)
 	{
-		delete[] name;
-		name=new char[st.len+1];
-		strcpy(name,st.name);
+		delete[] string;
+		string=new char[st.len+1];
+		strcpy(string,st.string);
 	}
 }
 
@@ -43,20 +47,20 @@ int string_t::length() const
 	return len;
 }
 
-void string_t::setString(const char* nm)
+void string_t::setString(const char* str)
 {
-	strcpy(name,nm);
-	len=strlen(nm);
+	strcpy(string,str);
+	len=strlen(str);
 }
 
 const char* string_t::getString() const
 {
-	return name;
+	return string;
 }
 
 int string_t::compare(string_t st2) const
 {
-	int result=(strcmp(name,st2.name));
+	int result=(strcmp(string,st2.string));
 	if(result==0)
 	{
 		return 0;
@@ -73,17 +77,17 @@ int string_t::compare(string_t st2) const
 
 void string_t::print() const
 {
-	printf("%s\n",name);
+	printf("%s\n",string);
 }
 /*********************************************************************************/
 void string_t::toLower()
 {
 	int i=0;
 	char c;
-	while(name[i])
+	while(string[i])
 	{
-		c=name[i];
-		name[i]=tolower(c);
+		c=string[i];
+		string[i]=tolower(c);
 		i++;
 	}
 }
@@ -92,17 +96,17 @@ void string_t::toUpper()
 {
 	int i=0;
 	char c;
-	while(name[i])
+	while(string[i])
 	{
-		c=name[i];
-		name[i]=toupper(c);
+		c=string[i];
+		string[i]=toupper(c);
 		i++;
 	}
 }
 
 int string_t::operator<(const string_t& st)
 {
-	if(strcmp(name,st.name)<0)
+	if(strcmp(string,st.string)<0)
 	{
 		return 1;
 	}
@@ -112,7 +116,7 @@ int string_t::operator<(const string_t& st)
 
 int string_t::operator>(const string_t& st)
 {
-	if(strcmp(name,st.name)>0)
+	if(strcmp(string,st.string)>0)
 	{
 		return 1;
 	}
@@ -122,7 +126,7 @@ int string_t::operator>(const string_t& st)
 
 int string_t::operator<=(const string_t& st)
 {
-	if(strcmp(name,st.name)<0 || strcmp(name,st.name)==0)
+	if(strcmp(string,st.string)<0 || strcmp(string,st.string)==0)
 	{
 		return 1;
 	}
@@ -132,7 +136,7 @@ int string_t::operator<=(const string_t& st)
 
 int string_t::operator>=(const string_t& st)
 {
-	if(strcmp(name,st.name)>0 || strcmp(name,st.name)==0)
+	if(strcmp(string,st.string)>0 || strcmp(string,st.string)==0)
 	{
 		return 1;
 	}
@@ -142,7 +146,7 @@ int string_t::operator>=(const string_t& st)
 
 int string_t::operator==(const string_t& st)
 {
-	if(strcmp(name,st.name)==0)
+	if(strcmp(string,st.string)==0)
 	{
 		return 1;
 	}
@@ -152,10 +156,83 @@ int string_t::operator==(const string_t& st)
 
 int string_t::operator!=(const string_t& st)
 {
-	if(strcmp(name,st.name)==0)
+	if(strcmp(string,st.string)==0)
 	{
 		return 0;
 	}
 	
 	return 1;
+}
+
+void string_t::operator+=(const string_t &st)
+{
+	strcat(string,st.string);
+	len+=strlen(st.getString());
+}
+
+void string_t::operator+=(const char* st)
+{
+	strcat(string,st);
+	len+=strlen(st);
+}
+
+void string_t::prepend(const string_t &st2)
+{
+	char stringPre[128];
+	strcpy(stringPre,st2.getString());
+	strcat(stringPre,string);
+	strcpy(string,stringPre);
+	len+=strlen(st2.getString());
+}
+
+void string_t::prepend(const char* st)
+{
+	char stringPre[128];
+	strcpy(stringPre,st);
+	strcat(stringPre,string);
+	strcpy(string,stringPre);	
+	len+=strlen(st);
+}
+
+int string_t::contains(const char* st) const
+{
+	char* result;
+	result=strstr(string,st);
+	if(result==NULL)
+	{
+		return 0;
+	}
+	return 1;
+}
+
+char string_t::operator[](size_t index) const
+{
+	if(index>=len)
+	{
+		printf("Over boundry index!\n");
+	}
+	return string[index];
+}
+
+char& string_t::operator[](size_t index)
+{
+	if(index>=len)
+	{
+		printf("Over boundry index!\n");
+	}
+	return string[index];
+}
+
+std::ostream& operator<<(std::ostream& os, const string_t &st)
+{
+	os<<st.getString();
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, string_t &st)
+{
+	char temp[128];
+	is>>temp;
+	st.setString(temp);
+	return is;
 }
