@@ -13,7 +13,7 @@ INCLUDES =
 LIBS =
 
 # define the C source files
-SRCS = string_t.cpp main.cpp
+SRCS = string_t.cpp testString_t.cpp
 
 # define the C object files 
 #
@@ -34,7 +34,7 @@ MAIN = Exe
 #--------------------------------------------------------------------
 
 all: $(MAIN)
-	@echo  Program named ‘Exe’ has been compiled
+	@echo  Program named ‘Executable’ has been compiled
 
 $(MAIN): $(OBJS) 
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
