@@ -8,6 +8,7 @@ using namespace std;
 
 size_t string_t::defaultCapacity=64;
 int string_t::caseSens=0;
+size_t string_t::numberOfObjects=0;
 
 string_t::string_t()
 {
@@ -15,6 +16,7 @@ string_t::string_t()
 	string[0]='\0';
     stringLength=0;
     stringCapacity=defaultCapacity;
+    numberOfObjects++;
 }
 
 string_t::string_t(const char* str)
@@ -34,10 +36,12 @@ string_t::string_t(const char* str)
     	stringLength=strlen(str);
     	stringCapacity=thisCapacity;
     }
+    numberOfObjects++;
 }
 
 string_t::~string_t()
 {
+	numberOfObjects--;
     delete[] string;
 }
 
@@ -48,6 +52,7 @@ string_t::string_t(const string_t& str)
 	strcpy(string,str.string);
 	stringLength=strlen(str.string);
 	stringCapacity=thisCapacity;
+	numberOfObjects++;
 }
 
 string_t& string_t::operator=(const string_t& str)
@@ -62,12 +67,7 @@ string_t& string_t::operator=(const string_t& str)
 	}
 	return *this;
 }
-/*
-size_t string_t::length() const
-{
-	return stringLength;
-}
-*/
+
 void string_t::setString(const char* str)
 {
 	delete[] string;
@@ -87,16 +87,11 @@ void string_t::setString(const char* str)
         stringCapacity=thisCapacity;
 	}
 }
-/*
-const char* string_t::getString() const
-{
-	return string;
-}
-*/
+
 int string_t::compare(const string_t& str)
 {
 	int result=0;
-	if(caseSens==1)
+	if(getCaseSens())
 	{
 		result=strcmp(string,str.string);
 	}
@@ -122,12 +117,6 @@ int string_t::compare(const string_t& str)
 		return 1;
 	}
 }
-/*
-void string_t::print() const
-{
-	cout<<string;
-}
-*/
 /*********************************************************************************/
 void string_t::toLower()
 {
@@ -151,66 +140,6 @@ void string_t::toUpper()
 		string[i]=toupper(c);
 		i++;
 	}
-}
-
-int string_t::operator<(const string_t& str)
-{
-	if(this->compare(str)==1)
-	{
-		return 1;
-	}
-
-	return 0;
-}
-
-int string_t::operator>(const string_t& str)
-{
-	if(this->compare(str)==2)
-	{
-		return 1;
-	}
-	
-	return 0;
-}
-
-int string_t::operator<=(const string_t& str)
-{
-	if(this->compare(str)==1 || this->compare(str)==0)
-	{
-		return 1;
-	}
-	
-	return 0;
-}
-
-int string_t::operator>=(const string_t& str)
-{
-	if(this->compare(str)==2 || this->compare(str)==0)
-	{
-		return 1;
-	}
-	
-	return 0;
-}
-
-int string_t::operator==(const string_t& str)
-{
-	if(this->compare(str)==0)
-	{
-		return 1;
-	}
-	
-	return 0;
-}
-
-int string_t::operator!=(const string_t& str)
-{
-	if(this->compare(str)==0)
-	{
-		return 0;
-	}
-	
-	return 1;
 }
 
 void string_t::operator+=(const string_t &str)
@@ -264,7 +193,7 @@ void string_t::prepend(const char* str)
 int string_t::contains(const char* str) const
 {
 	char* result;
-	if(caseSens==1)
+	if(getCaseSens())
 	{
 		result=strstr(string,str);
 	}
@@ -304,54 +233,101 @@ std::ostream& operator<<(std::ostream& os, const string_t &str)
 }
 
 std::istream& operator>>(std::istream& is, string_t &str)
-{/*
-	size_t thisSize=strlen(is);
-	char* buffer=new char[thisSize];
-	strcpy(buffer,str.string);
-	size_t thisCapacity=getRightSize(buffer);
-	stringLength=str.length();
-	delete[] string;
-	string=new char[thisCapacity];
-	delete[] buffer;
-	stringCapacity=thisCapacity;
-*/
+{
 	char temp[1024];
 	is>>temp;
 	str.setString(temp);
 	return is;
 }
 /*************************************************************************************/
-/*
-void string_t::setDefaultCapacity(const size_t value)
-{
-	defaultCapacity=value;
-}
-*//*
-size_t string_t::getDefaultCapacity() 
-{
-	return defaultCapacity;
-}*/
-/*
-size_t string_t::getStringCapacity() 
-{
-	return stringCapacity;
-}
-*//*
-void string_t::setCaseSens(const int value)
-{
-	caseSens=value;
-}
-*//*
-int string_t::getCaseSens()
-{
-	return caseSens;
-}*/
-
 size_t string_t::firstOccurrence(const char c) const
 {
-	char* index=strchr(string,c);
-	if(index)
+	if(getCaseSens())
 	{
-		return index-string;
+		char* index=strchr(string,c);
+		if(index!=NULL)
+		{
+			return index-string;
+		}
+		else
+		{
+			cout<<"No such first character"<<endl;
+			return 0;
+		}
+	}
+	else
+	{
+		string_t temp(string);
+		temp.toLower();
+		char* index=strchr(temp.string,tolower(c));
+		if(index!=NULL)
+		{
+			return index-temp.string;
+		}
+		else
+		{
+			cout<<"No such first character"<<endl;
+			return 0;
+		}
+	}
+}
+
+size_t string_t::lastOccurrence(const char c) const
+{
+	if(getCaseSens())
+	{
+		char* index=strrchr(string,c);
+		if(index!=NULL)
+		{
+			return index-string;
+		}
+		else
+		{
+			cout<<"No such last character"<<endl;
+			return 0;
+		}
+	}
+	else
+	{
+		string_t temp(string);
+		temp.toLower();
+		char* index=strrchr(temp.string,tolower(c));
+		if(index!=NULL)
+		{
+			return index-temp.string;
+		}
+		else
+		{
+			cout<<"No such first character"<<endl;
+			return 0;
+		}
+	}
+}
+
+size_t string_t::getNumberOfObjects()
+{
+	return numberOfObjects;
+}
+
+string_t string_t::operator()(const size_t start, const size_t len) const
+{
+	if(stringLength<start+len)
+	{
+		cout<<"Not possible"<<endl;
+		return NULL;
+	}
+	else
+	{
+		char* buffer=new char[len+1];
+		int i=0;
+		while(i<len)
+		{
+			buffer[i]=string[start+i];
+			i++;
+		}
+		buffer[len]='\0';
+		string_t newString(buffer);
+		delete[] buffer;
+		return newString;
 	}
 }
