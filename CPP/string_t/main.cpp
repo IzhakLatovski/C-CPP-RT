@@ -72,12 +72,15 @@ int main()
 	temp2.toLower();
 	temp1.print();
 	temp2.print();
+	temp1.setString("Izhak");
+	temp2.setString("izhAk");
 	printf("----%d----\n",(temp1>temp2));
 	printf("----%d----\n",(temp1<temp2));
-	printf("----%d----\n",(temp1<=temp2));
 	printf("----%d----\n",(temp1>=temp2));
+	printf("----%d----\n",(temp1<=temp2));
 	printf("----%d----\n",(temp1==temp2));
 	printf("----%d----\n",(temp1!=temp2));
+	printf("%lu\n",temp1.firstOccurrence('k'));/*
 	temp1+=temp2;
 	temp1.print();
 	temp1.setString("rita");
@@ -87,13 +90,17 @@ int main()
 	temp1.print();
 	temp1+="???";
 	temp1.print();
-	printf("%d\n",temp1.contains("ta?"));
-	printf("%d\n",temp1.length());
+	printf("%d\n",temp1.contains("Ta??"));
+	printf("%lu\n",temp1.length());
 	printf("---%c---\n",temp1[7]);
-	temp1[2]='T';
+	temp1[0]='Z';
 	cout<<temp1;
-	cin>>temp1;
+	cin>>temp2;
 	temp1.print();
+	printf("%lu",temp1.getDefaultCapacity());
+	printf("%lu",temp2.getDefaultCapacity());
+	temp2.print();
+	printf("\n%d\n",temp1.compare(temp2));*/
 
 	return 0;
 }
