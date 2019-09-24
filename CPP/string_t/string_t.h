@@ -14,12 +14,34 @@ class string_t
 		string_t(const char* str);				/*Type constructor*/
 		string_t(const string_t& str);			/*Copy constructor*/
 		string_t& operator=(const string_t &str);
-		int operator<(const string_t &str);
-		int operator>(const string_t &str);
-		int operator<=(const string_t &str);
-		int operator>=(const string_t &str);
-		int operator==(const string_t &str);
-		int operator!=(const string_t &str);
+		int operator<(const string_t &str)/********INLINE**********/
+		{
+			return (this->compare(str)==1) ? 1 : 0;
+		}
+
+		int operator>(const string_t &str)
+		{
+			return (this->compare(str)==2) ? 1 : 0;
+		}
+		int operator<=(const string_t &str)
+		{
+			return (this->compare(str)==1 || this->compare(str)==0) ? 1: 0;
+		}
+		int operator>=(const string_t &str)
+		{
+			return (this->compare(str)==2 || this->compare(str)==0) ? 1 : 0;
+		}
+
+		int operator==(const string_t &str)
+		{
+			return (this->compare(str)==0) ? 1 : 0;
+		}
+
+		int operator!=(const string_t &str)
+		{
+			return (this->compare(str)==0) ? 0 : 1;
+		}
+
 		void operator+=(const string_t &str);
 		void operator+=(const char* str);
 		char& operator[](size_t index);
@@ -71,6 +93,9 @@ class string_t
 			return stringCapacity;
 		}
 		size_t firstOccurrence(const char c) const;
+		size_t lastOccurrence(const char c) const;
+		static size_t getNumberOfObjects();
+		string_t operator()(const size_t start, const size_t len) const;
 
 	private:
 		char* string;
@@ -78,6 +103,7 @@ class string_t
 		size_t stringCapacity;
 		static int caseSens;
 		static size_t defaultCapacity;
+		static size_t numberOfObjects;
 
 		size_t getRightSize(const char* str) const
 		{
