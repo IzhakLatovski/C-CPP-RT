@@ -77,7 +77,8 @@ int string_t::compare(string_t str) const
 
 void string_t::print() const
 {
-	printf("%s\n",string);
+	cout<<string;
+	/*printf("%s\n",string);*/
 }
 /*********************************************************************************/
 void string_t::toLower()
@@ -209,7 +210,8 @@ char string_t::operator[](size_t index) const
 {
 	if(index>=stringLength)
 	{
-		printf("Over boundry index!\n");
+		cout<<"Over boundry index";
+		/*printf("Over boundry index!\n");*/
 	}
 	return string[index];
 }
@@ -218,7 +220,8 @@ char& string_t::operator[](size_t index)
 {
 	if(index>=stringLength)
 	{
-		printf("Over boundry index!\n");
+		cout<<"Over boundry index";
+		/*printf("Over boundry index!\n");*/
 	}
 	return string[index];
 }
