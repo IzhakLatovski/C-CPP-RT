@@ -198,7 +198,7 @@ void string_t::prepend(const char* str)
 {
 	size_t thisSize=strlen(str)+stringLength+1;
 	char* buffer=new char[thisSize];
-	strcpy(buffer,str;
+	strcpy(buffer,str);
 	strcat(buffer,string);
 	size_t thisCapacity=getRightSize(buffer);
 	stringLength=strlen(str)+stringLength;
@@ -207,13 +207,14 @@ void string_t::prepend(const char* str)
 	strcpy(string,buffer);
 	delete[] buffer;
 	stringCapacity=thisCapacity;
+}
 	/*
 	char stringPre[128];
 	strcpy(stringPre,str);
 	strcat(stringPre,string);
 	strcpy(string,stringPre);	
 	stringLength+=strlen(str);*/
-}
+
 
 int string_t::contains(const char* str) const
 {
