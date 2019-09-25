@@ -174,20 +174,45 @@ void string_t::operator+=(const char* str)
 
 void string_t::prepend(const string_t &str)
 {
+	size_t thisSize=str.length()+stringLength+1;
+	char* buffer=new char[thisSize];
+	strcpy(buffer,str.getString());
+	strcat(buffer,string);
+	size_t thisCapacity=getRightSize(buffer);
+	stringLength=str.length()+stringLength;
+	delete[] string;
+	string=new char[thisCapacity];
+	strcpy(string,buffer);
+	delete[] buffer;
+	stringCapacity=thisCapacity;
+
+/*
 	char stringPre[128];
 	strcpy(stringPre,str.getString());
 	strcat(stringPre,string);
 	strcpy(string,stringPre);
-	stringLength+=strlen(str.getString());
+	stringLength+=strlen(str.getString());*/
 }
 
 void string_t::prepend(const char* str)
 {
+	size_t thisSize=strlen(str)+stringLength+1;
+	char* buffer=new char[thisSize];
+	strcpy(buffer,str;
+	strcat(buffer,string);
+	size_t thisCapacity=getRightSize(buffer);
+	stringLength=strlen(str)+stringLength;
+	delete[] string;
+	string=new char[thisCapacity];
+	strcpy(string,buffer);
+	delete[] buffer;
+	stringCapacity=thisCapacity;
+	/*
 	char stringPre[128];
 	strcpy(stringPre,str);
 	strcat(stringPre,string);
 	strcpy(string,stringPre);	
-	stringLength+=strlen(str);
+	stringLength+=strlen(str);*/
 }
 
 int string_t::contains(const char* str) const
