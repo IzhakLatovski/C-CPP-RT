@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string.h>
 
 using namespace std;
 
@@ -11,11 +12,11 @@ class memManager_t
 	public:
 		bool isEmpty()
 		{
-			if(m_actualSize!=0)
-			{
-				return 0;
-			}
-			return 1;
+			return m_actualSize==0;
+		}
+		size_t getActualSize() const
+		{
+			return m_actualSize;	
 		}
 		size_t getCurrentPosition() const
 		{
@@ -40,11 +41,14 @@ class memManager_t
 			m_currentPosition=0;
 			m_actualSize=0;
 		}
-		virtual size_t write(const void*,size_t);
-		virtual size_t write(const void*,size_t,size_t position);
-		virtual size_t read(size_t);
-		virtual size_t read(size_t position,size_t);
+		virtual size_t write(const void* buffer, size_t size);
+		virtual size_t write(const void* buffer ,size_t size,size_t position);
+		virtual size_t read(/*const void* buffer??*/size_t size);
+		virtual size_t read(/*const void* buffer??*/size_t size,size_t position);
 	private:
 	size_t m_currentPosition;
 	size_t m_actualSize;
+	
+	/*memManager_t(const memManager_t &temp){} copy 
+        memManager_t& operator=(const memManager_t& temp){} operator= */
 };
