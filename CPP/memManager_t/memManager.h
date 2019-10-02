@@ -2,7 +2,6 @@
 #define MEMMANAGER_H
 
 #include <iostream>
-#include <vector>
 #include <string.h>
 
 using namespace std;
@@ -10,7 +9,8 @@ using namespace std;
 class memManager_t
 {
 	public:
-		bool isEmpty()
+
+		bool isEmpty() const
 		{
 			return m_actualSize==0;
 		}
@@ -24,31 +24,42 @@ class memManager_t
 		}
 		bool setCurrentPosition(size_t position)
 		{
-			if(position>m_actualSize)
+			try
 			{
-				return 0;
+				if(position>m_actualSize)
+				{
+					throw 1;
+				}
+				else
+				{
+					m_currentPosition=position;
+					return true;
+				}
 			}
-			else
+			catch (int except)
 			{
-				m_currentPosition=position;
-				return 1;
+				cout<<"Exception with the position. Can't set"<<endl;
 			}
 		}
+
 	protected:
-		virtual ~memManager_t();	/*Default destructor*/
+
+		virtual ~memManager_t()=0;	/*Default destructor*/
 		memManager_t()				/*Default constructor*/
 		{
 			m_currentPosition=0;
 			m_actualSize=0;
 		}
-		virtual size_t write(const void* buffer, size_t size);
-		virtual size_t write(const void* buffer ,size_t size,size_t position);
-		virtual size_t read(/*const void* buffer??*/size_t size);
-		virtual size_t read(/*const void* buffer??*/size_t size,size_t position);
+		virtual size_t write(const void* source, size_t size) {return 0;}
+		virtual size_t write(const void* source ,size_t size, size_t position) {return 0;}
+		virtual size_t read(void* target, size_t size) {return 0;}
+		virtual size_t read(void* target, size_t size, size_t position) {return 0;}
+
 	private:
-	size_t m_currentPosition;
-	size_t m_actualSize;
+
+		size_t m_currentPosition;
+		size_t m_actualSize;
 	
-	/*memManager_t(const memManager_t &temp){} copy 
-        memManager_t& operator=(const memManager_t& temp){} operator= */
+		memManager_t(const memManager_t &temp);
+        memManager_t& operator=(const memManager_t& temp);
 };
