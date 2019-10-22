@@ -3,6 +3,7 @@
 
 #include "meeting.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
