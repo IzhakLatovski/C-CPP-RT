@@ -18,14 +18,16 @@ class asciiIO_t:public virtIO_t
 
 		virtual virtIO_t& operator<<(char value)
 		{
-			if(!=(fprintf(m_file,/*%c*/,value)))
+			check();
+			if(!=(fprintf(m_file,/*"%c"*/,value)))
 			{
 				m_status=writeErr_e;
 			}
 		}
 		virtual virtIO_t& operator>>(char& value)
 		{
-			if(!=(fscanf(m_file,/*%c*/,value)))
+			check();
+			if(!=(fscanf(m_file,/*"%c"*/,value)))
 			{
 				m_status=readErr_e;
 			}

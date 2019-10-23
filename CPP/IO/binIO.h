@@ -18,17 +18,11 @@ class binIO_t:public virtIO_t
 
 		virtual virtIO_t& operator<<(char value)
 		{
-			if(!=(fwrite((const void*)val,sizeof(char),1,m_file)))
-			{
-				m_status=writeErr_e;
-			}
+			//fwrite
 		}
 		virtual virtIO_t& operator>>(char& value)
 		{
-			if(!=(fread(value,sizeof(char),1,m_file)))
-			{
-				m_status=readErr_e;
-			}
+			//fread
 		}
 		virtual virtIO_t& operator<<(unsigned char value)
 		{
