@@ -19,7 +19,7 @@ class asciiIO_t:public virtIO_t
 		virtual virtIO_t& operator<<(char value)
 		{
 			checkForOut();
-			if(!=(fprintf(m_file,/*"%c"*/,value)))
+			if(!=(fprintf(m_file,"%c",value)))
 			{
 				m_status=writeErr_e;
 			}
@@ -27,7 +27,7 @@ class asciiIO_t:public virtIO_t
 		virtual virtIO_t& operator>>(char& value)
 		{
 			checkForIn();
-			if(!=(fscanf(m_file,/*"%c"*/,value)))
+			if(!=(fscanf(m_file,"%c",value)))
 			{
 				m_status=readErr_e;
 			}
@@ -108,4 +108,13 @@ class asciiIO_t:public virtIO_t
 	private:
 		asciiIO_t(const asciiIO_t& temp);
 		asciiIO_t& operator=(const asciiIO_t& temp);
+
+		checkForOut()
+		{
+			if(m_status)
+		}
+		checkForIn()
+		{
+
+		}
 };

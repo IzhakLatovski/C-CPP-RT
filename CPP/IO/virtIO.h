@@ -21,10 +21,10 @@ class virtIO_t
 		inline const string& getPath()const;
 		inline const string& getAccess()const;
 		inline const size_t getLength()const;
-		inline void setPosition(size_t position;
+		inline void setPosition(size_t position);
 		inline size_t getPosition()const;
 		inline status getStatus()const;
-		inline void setStatus(status stat;
+		inline void setStatus(status stat);
 
 		// Operators
 		virtual virtIO_t& operator<<(char value)=0;
