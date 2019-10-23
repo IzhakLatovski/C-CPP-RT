@@ -12,7 +12,7 @@ using namespace std;
 class binIO_t:public virtIO_t
 {
 	public:
-		~binIO_t();
+		virtual ~binIO_t();
 		binIO_t();
 		binIO_t(const string& name, const string& mode);
 

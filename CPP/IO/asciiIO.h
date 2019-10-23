@@ -12,13 +12,13 @@ using namespace std;
 class asciiIO_t:public virtIO_t
 {
 	public:
-		~asciiIO_t();
+		virtual ~asciiIO_t();
 		asciiIO_t();
 		asciiIO_t(const string& name, const string& mode);
 
 		virtual virtIO_t& operator<<(char value)
 		{
-			check();
+			checkForOut();
 			if(!=(fprintf(m_file,/*"%c"*/,value)))
 			{
 				m_status=writeErr_e;
@@ -26,7 +26,7 @@ class asciiIO_t:public virtIO_t
 		}
 		virtual virtIO_t& operator>>(char& value)
 		{
-			check();
+			checkForIn();
 			if(!=(fscanf(m_file,/*"%c"*/,value)))
 			{
 				m_status=readErr_e;
@@ -104,4 +104,8 @@ class asciiIO_t:public virtIO_t
 		{
 			
 		}
+
+	private:
+		asciiIO_t(const asciiIO_t& temp);
+		asciiIO_t& operator=(const asciiIO_t& temp);
 };

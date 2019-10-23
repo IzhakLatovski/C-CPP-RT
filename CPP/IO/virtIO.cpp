@@ -9,7 +9,7 @@ virtIO_t::~virtIO_t()
 
 virtIO_t::virtIO_t()
 {
-	m_file=0;
+	//Wm_file=;
 	m_mode="/0";
 	m_path="/0";
 	m_status=ok_e;
@@ -46,5 +46,8 @@ status virtIO_t::open(const string& name, const string& mode)
 
 void virtIO_t::close()
 {
-	fclose(m_file);
+	if(m_status==ok_e)
+	{
+		fclose(m_file);
+	}
 }

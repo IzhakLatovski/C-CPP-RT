@@ -13,7 +13,7 @@ class virtIO_t
 {
 	public:
 		// Functions
-		~virtIO_t();
+		~virtual virtIO_t();
 		virtIO_t();
 		virtIO_t(const string& name, const string& mode);
 		status open(const string& name, const string& mode);
