@@ -18,7 +18,7 @@ queue<string>& tokenizer_t::tokenize(const string& myString)
 		{
 			tokens_m.push(myString.substr(occurance,1));
 		}
-		index=(++occurance);		// statrt again after the last dilimiter
+		index=(++occurance);		// start again after the last dilimiter
 		occurance=myString.find_first_of(delimiters_m,index);
 	}
 

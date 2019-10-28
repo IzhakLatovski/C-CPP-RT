@@ -32,7 +32,15 @@ void analyzer_t::checkOpeningBraces()
 {
 	if(roundBraces_m>0 || squareBraces_m>0 || curlyBraces_m>0)
 	{
-			cout<<"Error! Too much opening braces"<<endl;		
+			cout<<"Error! Too much ( opening braces"<<endl;		
+	}
+	else if(squareBraces_m>0)
+	{
+			cout<<"Error! Too much [] opening braces"<<endl;		
+	}
+	else if(curlyBraces_m>0)
+	{
+			cout<<"Error! Too much {} opening braces"<<endl;		
 	}
 }
 
@@ -101,11 +109,27 @@ void analyzer_t::checkPlusMinus(const string& str)
 {
 	if(!strcmp(str.c_str(),"+"))
 	{
-		plus_m++;
+		if(plus_m<=1)
+		{
+			plus_m++;
+		}
+		else
+		{
+			plus_m=0;
+			cout<<"+++ is not allowed"<<endl;
+		}
 	}
 	else if(!strcmp(str.c_str(),"-"))
 	{
-		minus_m++;
+		if(minus_m<=1)
+		{
+			minus_m++;
+		}
+		else
+		{
+			minus_m=0;
+			cout<<"--- is not allowed"<<endl;
+		}
 	}
 }
 
