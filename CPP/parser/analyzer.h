@@ -22,9 +22,18 @@ class analyzer_t
 		void checkIfElse(const string& str);
 		void checkPredefined();
 
+		predefined_moper
+		key
+		deli
+
 	private:
 		analyzer_t(const analyzer_t& temp);
 		analyzer_t& operator=(const analyzer_t& temp);
+
+		set<string> predefinedSet_m;
+		set<string> operatorsSet_m;
+		set<string> keywordsSet_m;
+		string delimitersString_m;
 
 		size_t lineNumber_m;
 

@@ -15,6 +15,16 @@ analyzer_t::analyzer_t()
     squareBraces_m=0;
     curlyBraces_m=0;
     ifElse_m=0;
+
+    string predefinedString[]={"char","short","int","long","float","double","void",};
+    string operatorsString[]={"++","--","==","->","=","+","-","*","&","<<",">>"};
+    string keywordsString[]={"if","else","for","while","class","private","public","protected","main","const","virtual",};
+
+	predefinedSet_m.insert(predefinedString);
+	operatorsSet_m.insert(operatorsString);
+	keywordsSet_m.insert(keywordsString);
+
+	delimitersString_m="()[]{};<>=+-*&";
 }
 
 void analyzer_t::analyze(queue<string>& tokens, size_t lineNumber)
