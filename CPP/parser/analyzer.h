@@ -20,12 +20,15 @@ class analyzer_t
 		void checkWords(const string& str);
 		void checkPlusMinus(const string& str);
 		void checkIfElse(const string& str);
+		void checkPredefined();
 
 	private:
 		analyzer_t(const analyzer_t& temp);
 		analyzer_t& operator=(const analyzer_t& temp);
 
 		size_t lineNumber_m;
+
+		bool predefined_m;
 
         size_t plus_m;
         size_t minus_m;

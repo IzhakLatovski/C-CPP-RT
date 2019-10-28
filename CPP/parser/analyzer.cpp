@@ -8,6 +8,7 @@ using namespace std;
 analyzer_t::analyzer_t()
 {
 	lineNumber_m=0;
+	predefined_m=0;
 	plus_m=0;
 	minus_m=0;
     roundBraces_m=0;
@@ -102,6 +103,19 @@ void analyzer_t::checkWords(const string& str)
 	else
 	{
 		cout<<"Error in line "<<lineNumber_m<<" . Bad name"<<endl;
+	}
+}
+
+void analyzer_t::checkPredefined()
+{
+	if(predefined_m)
+	{
+		cout<<"Error in line "<<lineNumber_m<<" . Predefined"<<endl;
+		predefined_m=false;
+	}
+	else
+	{
+		predefined_m=true;
 	}
 }
 
