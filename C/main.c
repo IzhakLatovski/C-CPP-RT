@@ -1,0 +1,32 @@
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <unistd.h>
+#include <pthread.h>
+
+#define SIZE 10000
+
+int counter=0;
+
+void *myThread(void *vargp) 
+{ 
+	sleep(0); 
+	counter++;
+	printf("%d \n",counter);
+	return NULL; 
+}
+
+int main() 
+{
+	int i=0;
+	pthread_t thread_id[SIZE];
+	for(i=0 ; i<SIZE ; i++)
+	{
+		pthread_create(&thread_id[i], NULL, myThread, NULL);
+	}
+	for(i=0 ; i<SIZE ; i++)
+	{
+		pthread_join(thread_id[i], NULL); 
+	}
+	 
+	exit(0); 
+}
