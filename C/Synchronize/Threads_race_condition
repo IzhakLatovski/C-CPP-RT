@@ -12,6 +12,7 @@ void *myThread(void *vargp)
 	sleep(0); 
 	counter++;
 	printf("%d \n",counter);
+	
 	return NULL; 
 }
 
@@ -28,5 +29,5 @@ int main()
 		pthread_join(thread_id[i], NULL); 
 	}
 	 
-	exit(0); 
+	return 0; 
 }
