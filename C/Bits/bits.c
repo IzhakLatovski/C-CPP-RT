@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "bits.h"
 
-
-
 /* function to print int type in its binary implementation */
 static void intToBinary(int number)
 {
@@ -21,7 +19,6 @@ static void intToBinary(int number)
  
   return;
 }
-
 
 
 /* function to create a bitmap, depending on the number of features user enters in main */
@@ -48,7 +45,6 @@ bitmap_t* createBitmap(int numberOfFeatures)
 }
 
 
-
 /* function to destroy a bitmap */
 void destroyBitmap(bitmap_t* bitmap)
 {
@@ -63,7 +59,6 @@ void destroyBitmap(bitmap_t* bitmap)
 }
 
 
-
 /* function to print the status of all excisting features in a row */
 void printAllFeatures(bitmap_t* bitmap)
 {
@@ -75,7 +70,6 @@ void printAllFeatures(bitmap_t* bitmap)
 	}
 	printf("\n");
 }
-
 
 
 /* function to turn on a specific bit (shift,or) */
@@ -97,7 +91,6 @@ int bitOn(bitmap_t* bitmap, int feature)
 }
 
 
-
 /* function to turn off a specific bit (shift,not,and) */
 int bitOff(bitmap_t* bitmap, int feature)
 {
@@ -115,7 +108,6 @@ int bitOff(bitmap_t* bitmap, int feature)
 
 	return 1;
 }
-
 
 
 /* function to get the status of a specific bit (shift,and) */
