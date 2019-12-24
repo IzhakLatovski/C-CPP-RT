@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "da.h"
 
-
-
 Array_t* createArray(int capacity)
 {
     Array_t* array;
